@@ -1,0 +1,45 @@
+name: dpcargo
+description: A new Flutter project.
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.16.0-80.1.beta <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+
+  get: any 
+  # provider: ^6.0.2
+  google_fonts: ^2.1.1
+  carousel_slider: ^4.0.0  
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  flutter_lints: ^1.0.0
+
+flutter:
+
+  uses-material-design: true
+
+
+  assets:
+    # Add assets from the images directory to the application.
+    - assets/images/
+  
+  fonts:
+    - family: Helvetica
+      fonts:
+        - asset: fonts/Helvetica.ttf
+        - asset: fonts/Helvetica-Bold-Font.ttf
+          weight: 700
+        - asset: fonts/Helvetica-Light.ttf
+          weight: 100
