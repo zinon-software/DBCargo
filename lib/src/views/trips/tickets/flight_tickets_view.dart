@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 
 import '../ticket_detail/ticket_detail_view.dart';
 
@@ -17,7 +18,7 @@ class _FlightTicketsState extends State<FlightTickets> {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.transparent,
+        backgroundColor: const Color(0xfff00d5d8),
         leading: IconButton(
           icon: const Icon(
             Icons.chevron_left,
@@ -25,22 +26,131 @@ class _FlightTicketsState extends State<FlightTickets> {
           ),
           onPressed: () => Get.back(),
         ),
+        title: Row(
+          children: <Widget>[
+            const Text(
+              "NYC",
+              style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.indigo),
+            ),
+            const SizedBox(
+              width: 16,
+            ),
+            Container(
+              padding: const EdgeInsets.all(6),
+              decoration: BoxDecoration(
+                  color: Colors.indigo.shade50,
+                  borderRadius: BorderRadius.circular(20)),
+              child: SizedBox(
+                height: 8,
+                width: 8,
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                      color: Colors.indigo.shade400,
+                      borderRadius: BorderRadius.circular(5)),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Stack(
+                  children: <Widget>[
+                    SizedBox(
+                      height: 24,
+                      child: LayoutBuilder(
+                        builder: (context, constraints) {
+                          return Flex(
+                            children: List.generate(
+                                (constraints.constrainWidth() / 6).floor(),
+                                (index) => SizedBox(
+                                      height: 1,
+                                      width: 3,
+                                      child: DecoratedBox(
+                                        decoration: BoxDecoration(
+                                            color: Colors.grey.shade300),
+                                      ),
+                                    )),
+                            direction: Axis.horizontal,
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          );
+                        },
+                      ),
+                    ),
+                    Center(
+                        child: Transform.rotate(
+                      angle: 1.5,
+                      child: Icon(
+                        Icons.local_airport,
+                        color: Colors.indigo.shade300,
+                        size: 24,
+                      ),
+                    ))
+                  ],
+                ),
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.all(6),
+              decoration: BoxDecoration(
+                  color: Colors.pink.shade50,
+                  borderRadius: BorderRadius.circular(20)),
+              child: SizedBox(
+                height: 8,
+                width: 8,
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                      color: Colors.pink.shade400,
+                      borderRadius: BorderRadius.circular(5)),
+                ),
+              ),
+            ),
+            const SizedBox(
+              width: 16,
+            ),
+            const Text(
+              "SFO",
+              style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.pink),
+            )
+          ],
+        ),
       ),
       backgroundColor: Colors.grey.shade200,
-      body: ListView.builder(
-          itemCount: 10,
-          padding: const EdgeInsets.only(top: 8, bottom: 8),
-          itemBuilder: (context, index) {
-            return Column(
-              children: [
-                if (index == 0)
-                  const SizedBox(
-                    height: 12,
-                  ),
-                TicketView(),
-              ],
-            );
-          }),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              height: 200,
+              decoration: const BoxDecoration(
+                color: Color(0xfff00d5d8),
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(30.0),
+                  // bottomRight: Radius.circular(20.0),
+                ),
+              ),
+              // child: ,
+            ),
+            ListView.builder(
+                shrinkWrap: true,
+                primary: false,
+                itemCount: 10,
+                padding: const EdgeInsets.only(top: 8, bottom: 8),
+                itemBuilder: (context, index) {
+                  return Column(
+                    children: [
+                      TicketView(),
+                    ],
+                  );
+                }),
+          ],
+        ),
+      ),
     );
   }
 }
