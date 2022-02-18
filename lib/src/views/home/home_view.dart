@@ -14,7 +14,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[400],
+      backgroundColor: Colors.grey[300],
       body: Column(
         children: <Widget>[
           Container(
@@ -51,10 +51,7 @@ class HomeView extends StatelessWidget {
                 ComplicatedImageDemo(),
                 Expanded(
                   flex: 5,
-                  child: Padding(
-                    padding: const EdgeInsets.all(0.0),
-                    child: Image.asset('assets/images/logos1.png'),
-                  ),
+                  child: Image.asset('assets/images/logos.png'),
                 ),
                 const Expanded(
                   flex: 1,

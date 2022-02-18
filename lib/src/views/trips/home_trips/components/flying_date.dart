@@ -1,4 +1,4 @@
-import 'dart:developer';
+import 'package:intl/intl.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -6,12 +6,10 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../controllers/searsh_controller.dart';
 
-
 class FlyingDate extends StatelessWidget {
-  FlyingDate({ Key? key }) : super(key: key);
+  FlyingDate({Key? key}) : super(key: key);
 
   final SearshController appState = Get.find();
-
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +21,6 @@ class FlyingDate extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.grey[300],
           borderRadius: BorderRadius.circular(12.0),
-          // border: Border.all(
-          //   color: Colors.white.withOpacity(1.0),
-          // ),
           boxShadow: [
             BoxShadow(
               color: Colors.grey.shade600,
@@ -51,7 +46,10 @@ class FlyingDate extends StatelessWidget {
                   // color: Colors.white,
                   padding:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  onPressed: () => appState.selectedCategory.value.categoryId != 0 ? pickDateRange(context) : pickDate(context),
+                  onPressed: () =>
+                      appState.selectedCategory.value.categoryId != 0
+                          ? pickDateRange(context)
+                          : pickDate(context),
                   child: buildDateSelector("DEPARTURE", appState.start!.value),
                 ),
               ),
@@ -117,7 +115,7 @@ class FlyingDate extends StatelessWidget {
                     style: GoogleFonts.overpass(fontSize: 10),
                   ),
                   Text(
-                    'Friday',
+                    DateFormat(DateFormat.WEEKDAY).format(dateTime),
                     style:
                         GoogleFonts.overpass(fontSize: 10, color: Colors.black),
                   ),

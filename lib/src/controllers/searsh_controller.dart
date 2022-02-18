@@ -55,7 +55,7 @@ class SearshController extends GetxController {
   Rx<AirportModel> _arrivalAirport =
       AirportModel(name: "BAS", city: "Mumbai").obs;
   Rx<AirportModel> _departureAirport =
-      AirportModel(name: "SFO", city: "SunFransisco").obs;
+      AirportModel(name: "NYC", city: "NewYork").obs;
 
   get getArrivalAirport => _arrivalAirport;
   get getDepartureAirport => _departureAirport;
@@ -95,6 +95,5 @@ class SearshController extends GetxController {
 
   // flying date
 
-  Rx<DateTime>? start = DateTime(2022, 2, 11).obs,
-      end = DateTime(2022, 2, 28).obs;
+  Rx<DateTime>? start = DateTime.now().obs, end = DateTime.now().obs;
 }

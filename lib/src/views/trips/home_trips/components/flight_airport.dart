@@ -17,72 +17,74 @@ class _FlightAirportState extends State<FlightAirport> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-      child: Container(
-        height: 90.0,
-        width: MediaQuery.of(context).size.width - 82,
-        decoration: BoxDecoration(
-          color: Colors.grey[300],
-          borderRadius: BorderRadius.circular(12.0),
-          // border: Border.all(
-          //   color: Colors.white.withOpacity(1.0),
-          // ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.shade600,
-              offset: const Offset(4, 4),
-              blurRadius: 15.0,
-              spreadRadius: 1,
-            ),
-            const BoxShadow(
-              color: Colors.white,
-              offset: Offset(-4, -4),
-              blurRadius: 15.0,
-              spreadRadius: 1,
-            ),
-          ],
-        ),
+    return Container(
+      height: 90.0,
+      width: MediaQuery.of(context).size.width - 82,
+      decoration: BoxDecoration(
+        color: Colors.grey[300],
+        borderRadius: BorderRadius.circular(12.0),
+        // border: Border.all(
+        //   color: Colors.white.withOpacity(1.0),
+        // ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.shade600,
+            offset: const Offset(4, 4),
+            blurRadius: 15.0,
+            spreadRadius: 1,
+          ),
+          const BoxShadow(
+            color: Colors.white,
+            offset: Offset(-4, -4),
+            blurRadius: 15.0,
+            spreadRadius: 1,
+          ),
+        ],
+      ),
+      child: Padding(
+        padding: const EdgeInsets.only(left: 10.0, right: 10.0),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            MaterialButton(
-              onPressed: () {
-                Get.to(
-                  () => GetValueTextFilde(
-                    airportType: "departureAirport",
-                    searshController: searshController,
+            Expanded(
+              child: MaterialButton(
+                onPressed: () {
+                  Get.to(
+                    () => GetValueTextFilde(
+                      airportType: "departureAirport",
+                      searshController: searshController,
+                    ),
+                  );
+                },
+                child: Container(
+                  width: 110,
+                  height: MediaQuery.of(context).size.height,
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    borderRadius: BorderRadius.circular(18.0),
                   ),
-                );
-              },
-              child: Container(
-                width: 110,
-                height: MediaQuery.of(context).size.height,
-                decoration: BoxDecoration(
-                  color: Colors.transparent,
-                  borderRadius: BorderRadius.circular(18.0),
-                ),
-                child: Obx(
-                  () {
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const FaIcon(
-                          FontAwesomeIcons.planeDeparture,
-                          size: 20,
-                        ),
-                        Text(
-                          searshController.getDepartureAirport.value.name,
-                          style: const TextStyle(color: Colors.black),
-                        ),
-                        Text(
-                          searshController.getDepartureAirport.value.city,
-                          style: const TextStyle(color: Colors.black),
-                        ),
-                      ],
-                    );
-                  },
+                  child: Obx(
+                    () {
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const FaIcon(
+                            FontAwesomeIcons.planeDeparture,
+                            size: 20,
+                          ),
+                          Text(
+                            searshController.getDepartureAirport.value.name,
+                            style: const TextStyle(color: Colors.black),
+                          ),
+                          Text(
+                            searshController.getDepartureAirport.value.city,
+                            style: const TextStyle(color: Colors.black),
+                          ),
+                        ],
+                      );
+                    },
+                  ),
                 ),
               ),
             ),
@@ -103,42 +105,44 @@ class _FlightAirportState extends State<FlightAirport> {
                 ),
               ),
             ),
-            MaterialButton(
-              onPressed: () {
-                Get.to(
-                  () => GetValueTextFilde(
-                    airportType: "arrivalAirport",
-                    searshController: searshController,
+            Expanded(
+              child: MaterialButton(
+                onPressed: () {
+                  Get.to(
+                    () => GetValueTextFilde(
+                      airportType: "arrivalAirport",
+                      searshController: searshController,
+                    ),
+                  );
+                },
+                child: Container(
+                  width: 110,
+                  height: MediaQuery.of(context).size.height,
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    borderRadius: BorderRadius.circular(18.0),
                   ),
-                );
-              },
-              child: Container(
-                width: 110,
-                height: MediaQuery.of(context).size.height,
-                decoration: BoxDecoration(
-                  color: Colors.transparent,
-                  borderRadius: BorderRadius.circular(18.0),
-                ),
-                child: Obx(
-                  () {
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const FaIcon(
-                          FontAwesomeIcons.planeArrival,
-                          size: 20,
-                        ),
-                        Text(
-                          searshController.getArrivalAirport.value.name,
-                          style: const TextStyle(color: Colors.black),
-                        ),
-                        Text(
-                          searshController.getArrivalAirport.value.city,
-                          style: const TextStyle(color: Colors.black),
-                        ),
-                      ],
-                    );
-                  },
+                  child: Obx(
+                    () {
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const FaIcon(
+                            FontAwesomeIcons.planeArrival,
+                            size: 20,
+                          ),
+                          Text(
+                            searshController.getArrivalAirport.value.name,
+                            style: const TextStyle(color: Colors.black),
+                          ),
+                          Text(
+                            searshController.getArrivalAirport.value.city,
+                            style: const TextStyle(color: Colors.black),
+                          ),
+                        ],
+                      );
+                    },
+                  ),
                 ),
               ),
             ),

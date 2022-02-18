@@ -38,8 +38,8 @@ class CategoryWidget extends StatelessWidget {
           child: Text(
             category.name!,
             style: isSelected
-                ? TextStyle(color: ThemeColors.green)
-                : const TextStyle(color: Colors.white),
+                ? TextStyle(color: ThemeColors.green, fontSize: 12)
+                : const TextStyle(color: Colors.white, fontSize: 10),
           ),
         ),
       ),

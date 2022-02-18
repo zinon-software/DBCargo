@@ -17,7 +17,7 @@ class HomeTripsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.grey[400],
+      backgroundColor: Colors.grey[300],
       // extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Colors.grey[300],

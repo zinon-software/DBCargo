@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class TicketDetailView extends StatefulWidget {
   @override
@@ -13,12 +14,13 @@ class _TicketDetailViewState extends State<TicketDetailView> {
       body: SingleChildScrollView(
         child: SafeArea(
           child: Container(
-            margin: const EdgeInsets.only(left: 15, top: 40, bottom: 60),
+            margin: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+
+            // margin: const EdgeInsets.only(top: 40, bottom: 60),
+            alignment: Alignment.center,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Options(),
-                const SizedBox(height: 20),
                 BoxDestination(),
                 const SizedBox(height: 22),
                 SelectWay(),
@@ -35,66 +37,6 @@ class _TicketDetailViewState extends State<TicketDetailView> {
   }
 }
 
-class Options extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 40,
-      child: ListView(
-        scrollDirection: Axis.horizontal,
-        children: const <Widget>[
-          BtnOptions(
-            label: "Flights",
-            color: Color(0xFFFf89380),
-          ),
-          BtnOptions(
-            label: "Train",
-            color: Color(0xFFF9b9ba0),
-          ),
-          BtnOptions(
-            label: "Bus",
-            color: Color(0xFFF9b9ba0),
-          ),
-          BtnOptions(
-            label: "Hotel",
-            color: Color(0xFFF9b9ba0),
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class BtnOptions extends StatelessWidget {
-  final Function? onTap;
-  final String? label;
-  final Color? color;
-
-  const BtnOptions({Key? key, this.onTap, this.label, this.color})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () => onTap,
-      child: Container(
-        margin: const EdgeInsets.only(right: 10),
-        alignment: Alignment.center,
-        height: 40,
-        width: 100,
-        decoration: BoxDecoration(
-            color: color?.withOpacity(0.5),
-            borderRadius: const BorderRadius.all(Radius.circular(14))),
-        child: Text(
-          label!,
-          style: TextStyle(
-              color: color, fontSize: 15, fontWeight: FontWeight.bold),
-        ),
-      ),
-    );
-  }
-}
-
 class BoxDestination extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -105,13 +47,13 @@ class BoxDestination extends StatelessWidget {
       width: MediaQuery.of(context).size.width * 0.85,
       decoration: const BoxDecoration(
           color: Colors.white,
-          borderRadius: const BorderRadius.all(const Radius.circular(14))),
+          borderRadius: BorderRadius.all(Radius.circular(14))),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Row(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               const SizedBox(width: 10),
               _iconDestination(),
@@ -194,12 +136,15 @@ class SelectWay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      alignment: Alignment.center,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          const Text("Select the way", style: const TextStyle(fontSize: 20)),
+          const Text("Select the way", style: TextStyle(fontSize: 20)),
           const SizedBox(height: 10),
           Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: const <Widget>[
               BtnWay(
                 label: "ROUND TRIP",
@@ -528,7 +473,11 @@ Widget _icon(Color color) {
     decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.all(Radius.circular(10))),
-    child: Icon(Icons.card_giftcard_outlined, color: color, size: 32),
+    child: Icon(
+      FontAwesomeIcons.weightHanging,
+      color: color,
+      size: 32,
+    ),
   );
 }
 

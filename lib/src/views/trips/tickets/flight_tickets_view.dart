@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 
 import '../ticket_detail/ticket_detail_view.dart';
 
@@ -126,15 +125,60 @@ class _FlightTicketsState extends State<FlightTickets> {
         child: Column(
           children: [
             Container(
-              height: 200,
+              height: 160,
+              alignment: Alignment.bottomCenter,
               decoration: const BoxDecoration(
                 color: Color(0xfff00d5d8),
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(30.0),
-                  // bottomRight: Radius.circular(20.0),
-                ),
               ),
-              // child: ,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 30, vertical: 8),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "12 Sep - 15 Sep",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        Text(
+                          "1 Adult, Economy",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: 35,
+                    alignment: Alignment.bottomCenter,
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade200,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(45.0),
+                        topRight: Radius.circular(45.0),
+                      ),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 25,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            "18 Search Resulte",
+                            style: TextStyle(color: Colors.black),
+                          ),
+                          Icon(Icons.filter_list),
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
             ListView.builder(
                 shrinkWrap: true,
