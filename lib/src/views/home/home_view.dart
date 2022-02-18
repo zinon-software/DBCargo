@@ -25,9 +25,6 @@ class HomeView extends StatelessWidget {
                 bottomLeft: Radius.circular(45.0),
                 bottomRight: Radius.circular(45.0),
               ),
-              border: Border.all(
-                color: Colors.white.withOpacity(1.0),
-              ),
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.shade600,
@@ -115,7 +112,7 @@ class HomeView extends StatelessWidget {
                         ),
                         const BoxShadow(
                           color: Colors.white,
-                          offset: Offset(-4, -4),
+                          offset: Offset(-1, -1),
                           blurRadius: 15.0,
                           spreadRadius: 1,
                         ),
@@ -159,7 +156,7 @@ class HomeView extends StatelessWidget {
                         ),
                         const BoxShadow(
                           color: Colors.white,
-                          offset: Offset(-4, -4),
+                          offset: Offset(-1, -1),
                           blurRadius: 15.0,
                           spreadRadius: 1,
                         ),

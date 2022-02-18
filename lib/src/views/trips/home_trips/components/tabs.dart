@@ -3,14 +3,9 @@ import 'package:get/get.dart';
 import '../../../../controllers/searsh_controller.dart';
 import '../../../widgets/catgeory_widget.dart';
 
-class MyTabs extends StatefulWidget {
-  const MyTabs({Key? key}) : super(key: key);
+class MyTabs extends StatelessWidget {
+  const MyTabs({ Key? key }) : super(key: key);
 
-  @override
-  _MyTabsState createState() => _MyTabsState();
-}
-
-class _MyTabsState extends State<MyTabs> {
   @override
   Widget build(BuildContext context) {
     final SearshController appState = Get.find();

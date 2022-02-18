@@ -18,7 +18,7 @@ class ThemeStyles {
   );
   static TextStyle dropDownTextStyle = const TextStyle(
     color: Colors.black,
-    fontSize: 10.0,
+    fontSize: 12.0,
   );
   static TextStyle ticketPrice = TextStyle(
     color: ThemeColors.orange,

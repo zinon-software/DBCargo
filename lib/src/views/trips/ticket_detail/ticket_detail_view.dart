@@ -13,9 +13,9 @@ class _TicketDetailViewState extends State<TicketDetailView> {
       body: SingleChildScrollView(
         child: SafeArea(
           child: Container(
-            margin: const EdgeInsets.only(left: 30, top: 40, bottom: 60),
+            margin: const EdgeInsets.only(left: 15, top: 40, bottom: 60),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Options(),
                 const SizedBox(height: 20),
@@ -488,12 +488,12 @@ Widget _price(String price, kg) {
   return Container(
     child: Row(
       children: <Widget>[
-        Text(price, style: const TextStyle(color: Colors.white, fontSize: 25)),
+        Text(price, style: const TextStyle(color: Colors.white, fontSize: 20)),
         const SizedBox(width: 5),
-        const Icon(Icons.trending_flat, size: 25, color: Colors.white),
+        const Icon(Icons.trending_flat, size: 20, color: Colors.white),
         const SizedBox(width: 5),
-        const Text("kg", style: TextStyle(color: Colors.white, fontSize: 25)),
-        Text(kg, style: const TextStyle(color: Colors.white, fontSize: 25)),
+        Text(kg, style: const TextStyle(color: Colors.white, fontSize: 20)),
+        const Text(" kg", style: TextStyle(color: Colors.white, fontSize: 20)),
       ],
     ),
   );

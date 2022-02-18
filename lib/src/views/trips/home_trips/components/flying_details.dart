@@ -16,7 +16,7 @@ class FlyingDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100.0,
+      height: 90.0,
       width: MediaQuery.of(context).size.width - 82,
       decoration: BoxDecoration(
         color: Colors.grey[300],

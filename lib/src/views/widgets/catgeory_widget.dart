@@ -23,12 +23,17 @@ class CategoryWidget extends StatelessWidget {
         }
       },
       child: Container(
+        padding: const EdgeInsets.all(8.0),
         width: 110,
         height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
-          color: isSelected ? Colors.white : Colors.transparent,
-          borderRadius: BorderRadius.circular(18.0),
-        ),
+            color: isSelected ? Colors.white : Colors.transparent,
+            borderRadius: BorderRadius.circular(18.0),
+            border: isSelected
+                ? Border.all(
+                    color: const Color.fromARGB(255, 179, 175, 175),
+                  )
+                : null),
         child: Center(
           child: Text(
             category.name!,

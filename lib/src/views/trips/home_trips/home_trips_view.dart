@@ -15,7 +15,6 @@ class HomeTripsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.grey[400],
@@ -70,6 +69,7 @@ class HomeTripsView extends StatelessWidget {
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               const SizedBox(height: 10.0),
               const Expanded(flex: 1, child: SortingDetails()),
