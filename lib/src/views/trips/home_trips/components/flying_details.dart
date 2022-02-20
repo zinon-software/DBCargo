@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:dpcargo/src/controllers/searsh_controller.dart';
 import 'package:flutter/material.dart';
@@ -21,9 +20,6 @@ class FlyingDetails extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.grey[300],
         borderRadius: BorderRadius.circular(12.0),
-        // border: Border.all(
-        //   color: Colors.white.withOpacity(1.0),
-        // ),
         boxShadow: [
           BoxShadow(
             color: Colors.grey.shade600,

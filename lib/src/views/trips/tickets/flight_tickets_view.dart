@@ -17,7 +17,7 @@ class _FlightTicketsState extends State<FlightTickets> {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: const Color(0xfff00d5d8),
+        backgroundColor: Color(0xFF64B5F6),
         leading: IconButton(
           icon: const Icon(
             Icons.chevron_left,
@@ -128,7 +128,7 @@ class _FlightTicketsState extends State<FlightTickets> {
               height: 160,
               alignment: Alignment.bottomCenter,
               decoration: const BoxDecoration(
-                color: Color(0xfff00d5d8),
+                color: Color(0xFF64B5F6),
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,

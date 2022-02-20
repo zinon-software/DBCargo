@@ -81,15 +81,15 @@ class SearshController extends GetxController {
   RxList categories = [
     Category(
       categoryId: 0,
-      name: 'ONE WAY',
+      name: 'One-Way',
     ),
     Category(
       categoryId: 2,
-      name: 'ROUND TRIP',
+      name: 'Round Trip',
     ),
     Category(
       categoryId: 1,
-      name: 'MULTI-CITY',
+      name: 'Multi-City',
     ),
   ].obs;
 

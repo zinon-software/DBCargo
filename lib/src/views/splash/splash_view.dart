@@ -1,11 +1,11 @@
 import 'dart:async';
 
+import 'package:dpcargo/src/views/onboarding/onboarding_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../home/home_view.dart';
-import '../utilities/themeColors.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({Key? key}) : super(key: key);
@@ -20,7 +20,7 @@ class _SplashViewState extends State<SplashView> {
     SystemChrome.setPreferredOrientations(
         [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
     SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(statusBarColor: Colors.grey[300]));
+        const SystemUiOverlayStyle(statusBarColor: Color(0xFF64B5F6)));
     startTimer(context);
     super.didChangeDependencies();
   }
@@ -67,7 +67,7 @@ class _SplashViewState extends State<SplashView> {
   void startTimer(BuildContext context) {
     Timer(
       const Duration(seconds: 6),
-      () => Get.offAll(() => const HomeView()),
+      () => Get.offAll(() => const OnboardingView()),
     );
   }
 }

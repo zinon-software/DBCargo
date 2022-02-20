@@ -10,23 +10,28 @@ class _TicketDetailViewState extends State<TicketDetailView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFf6f5fb),
+      backgroundColor: const Color(0xFF64B5F6),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-
-            // margin: const EdgeInsets.only(top: 40, bottom: 60),
-            alignment: Alignment.center,
+            margin: const EdgeInsets.symmetric(vertical: 30),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
+              children: [
                 BoxDestination(),
-                const SizedBox(height: 22),
-                SelectWay(),
-                const SizedBox(height: 25),
-                SelectOptions(),
-                const SizedBox(height: 16),
+                Container(
+                  margin: const EdgeInsets.only(left: 10),
+                  alignment: Alignment.center,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      const SizedBox(height: 22),
+                      SelectWay(),
+                      const SizedBox(height: 25),
+                      SelectOptions(),
+                      const SizedBox(height: 16),
+                    ],
+                  ),
+                ),
                 Recommendation()
               ],
             ),
@@ -53,13 +58,10 @@ class BoxDestination extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              const SizedBox(width: 10),
               _iconDestination(),
-              const SizedBox(width: 17),
               _originAndDestionation(),
-              const SizedBox(width: 70),
               _originAndDestionationIcon()
             ],
           )
@@ -74,11 +76,11 @@ Widget _originAndDestionationIcon() {
     crossAxisAlignment: CrossAxisAlignment.start,
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: const <Widget>[
-      Text("SFO", style: TextStyle(fontSize: 25)),
+      Text("SFO", style: TextStyle(fontSize: 20)),
       SizedBox(height: 15),
       Icon(Icons.swap_vert, color: Color(0xFFF00d5d8), size: 40),
       SizedBox(height: 15),
-      Text("JFK", style: TextStyle(fontSize: 25)),
+      Text("JFK", style: TextStyle(fontSize: 20)),
     ],
   );
 }
@@ -146,15 +148,19 @@ class SelectWay extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: const <Widget>[
-              BtnWay(
-                label: "ROUND TRIP",
-                iconData: Icons.swap_horiz,
-                color: Color(0xFFF00d5d8),
+              Expanded(
+                child: BtnWay(
+                  label: "ROUND TRIP",
+                  iconData: Icons.swap_horiz,
+                  color: Color(0xFFF00d5d8),
+                ),
               ),
-              BtnWay(
-                label: "ONE WAY",
-                iconData: Icons.trending_flat,
-                color: Color(0xFFFababbc),
+              Expanded(
+                child: BtnWay(
+                  label: "ONE WAY",
+                  iconData: Icons.trending_flat,
+                  color: Color.fromARGB(255, 131, 131, 175),
+                ),
               )
             ],
           )
@@ -219,17 +225,21 @@ class SelectOptions extends StatelessWidget {
       children: <Widget>[
         Row(
           children: const <Widget>[
-            BtnPassengers(
-              title: "Departure",
-              label: "22 Oct, 2022",
-              color: Color(0xFFFfeb578),
-              iconData: Icons.today,
+            Expanded(
+              child: BtnPassengers(
+                title: "Departure",
+                label: "22 Oct, 2022",
+                color: Color(0xFFFfeb578),
+                iconData: Icons.today,
+              ),
             ),
-            BtnPassengers(
-              title: "Return",
-              label: "23 Nov, 2022",
-              color: Color(0xFFF00d5d8),
-              iconData: Icons.today,
+            Expanded(
+              child: BtnPassengers(
+                title: "Return",
+                label: "23 Nov, 2022",
+                color: Color(0xFFF00d5d8),
+                iconData: Icons.today,
+              ),
             )
           ],
         ),
@@ -273,7 +283,7 @@ class BtnPassengers extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(title!, style: const TextStyle(color: Color(0xFFFa9a9ba))),
+          Text(title!, style: const TextStyle(color: Colors.black)),
           const SizedBox(height: 4),
           Container(
             margin: const EdgeInsets.only(right: 10),
@@ -323,14 +333,18 @@ class Recommendation extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const Text("Recommended for you",
-            style: const TextStyle(color: Colors.black, fontSize: 20)),
-        const SizedBox(height: 14),
+        Padding(
+          padding: const EdgeInsets.only(left: 8.0),
+          child: const Text("Recommended for you",
+              style: TextStyle(color: Colors.black, fontSize: 20)),
+        ),
+        const SizedBox(height: 5),
         Container(
           height: 200,
           child: ListView(
             scrollDirection: Axis.horizontal,
             children: <Widget>[
+              const SizedBox(width: 10),
               RecommendationItem(
                 title: "nome",
                 price: "\$ 30",
@@ -419,7 +433,7 @@ class RecommendationItem extends StatelessWidget {
             const Text("22 February 2022",
                 style: TextStyle(color: Colors.white)),
             const SizedBox(height: 14),
-            _destination(),
+            Expanded(child: _destination()),
             const SizedBox(height: 10),
             _price(price!, kg!)
           ],
@@ -450,7 +464,7 @@ Widget _destination() {
       children: const <Widget>[
         Text("SFO",
             style: TextStyle(
-                fontSize: 22,
+                fontSize: 20,
                 color: Colors.white,
                 fontWeight: FontWeight.bold)),
         SizedBox(width: 10),
@@ -458,7 +472,7 @@ Widget _destination() {
         SizedBox(width: 10),
         Text("OSL",
             style: TextStyle(
-                fontSize: 22,
+                fontSize: 20,
                 color: Colors.white,
                 fontWeight: FontWeight.bold)),
       ],
