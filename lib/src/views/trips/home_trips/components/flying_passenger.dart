@@ -1,4 +1,4 @@
-import 'package:dpcargo/src/controllers/searsh_controller.dart';
+import 'package:dpcargo/src/controllers/trip_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';

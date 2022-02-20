@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../controllers/searsh_controller.dart';
+import '../../../controllers/trip_controller.dart';
 import '../../widgets/month_name.dart';
 import '../ticket_detail/ticket_detail_view.dart';
 

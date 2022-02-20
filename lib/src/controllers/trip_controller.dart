@@ -1,7 +1,4 @@
-import 'dart:developer';
-
 import 'package:dpcargo/src/models/airport_model.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -28,7 +25,6 @@ class SearshController extends GetxController {
   void addAdult() {
     _adult.value += 1;
     _travellers.value += 1;
-    log(_adult.value.toString());
   }
 
   void addChild() {

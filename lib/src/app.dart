@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'controllers/searsh_controller.dart';
+import 'controllers/trip_controller.dart';
 import 'views/splash/splash_view.dart';
 
 class MyApp extends StatelessWidget {

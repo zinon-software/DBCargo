@@ -34,6 +34,11 @@ class HomeView extends StatelessWidget {
             const SizedBox(
               height: 30,
             ),
+            Expanded(
+              flex: 5,
+              // child: Image.asset('assets/images/logos.png'),
+              child: SizedBox(),
+            ),
             const Expanded(
               flex: 1,
               child: Padding(
@@ -43,16 +48,11 @@ class HomeView extends StatelessWidget {
                     "DP CARGO SAVE WHILE TRAVELLING",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      color: Colors.white70,
                     ),
                   ),
                 ),
               ),
-            ),
-            Expanded(
-              flex: 5,
-              // child: Image.asset('assets/images/logos.png'),
-              child: SizedBox(),
             ),
             ComplicatedImageDemo(),
             const SizedBox(

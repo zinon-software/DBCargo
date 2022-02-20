@@ -2,15 +2,13 @@ import 'package:dpcargo/src/views/trips/home_trips/components/flight_nonstop.dar
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import '../../../controllers/searsh_controller.dart';
+import '../../../controllers/trip_controller.dart';
 import '../../../models/category.dart';
 import '../../widgets/text_widget.dart';
-import '../tickets/flight_tickets_view.dart';
 import 'components/flight_airport.dart';
 import 'components/flying_button_search.dart';
 import 'components/flying_date.dart';
 import 'components/flying_passenger.dart';
-import '../../widgets/sorting_details.dart';
 import 'components/flying_class.dart';
 
 class HomeTripsView extends StatelessWidget {

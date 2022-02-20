@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../controllers/searsh_controller.dart';
+import '../../controllers/trip_controller.dart';
 import '../../models/category.dart';
 import '../utilities/themeColors.dart';
 
