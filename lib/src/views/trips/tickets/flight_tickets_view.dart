@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../controllers/searsh_controller.dart';
+import '../../widgets/month_name.dart';
 import '../ticket_detail/ticket_detail_view.dart';
 
 class FlightTickets extends StatefulWidget {
@@ -11,13 +13,14 @@ class FlightTickets extends StatefulWidget {
 }
 
 class _FlightTicketsState extends State<FlightTickets> {
+  final SearshController appState = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Color(0xFF64B5F6),
+        backgroundColor: const Color(0xFF64B5F6),
         leading: IconButton(
           icon: const Icon(
             Icons.chevron_left,
@@ -27,9 +30,9 @@ class _FlightTicketsState extends State<FlightTickets> {
         ),
         title: Row(
           children: <Widget>[
-            const Text(
-              "NYC",
-              style: TextStyle(
+            Text(
+              appState.getDepartureAirport.value.name,
+              style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                   color: Colors.indigo),
@@ -110,9 +113,9 @@ class _FlightTicketsState extends State<FlightTickets> {
             const SizedBox(
               width: 16,
             ),
-            const Text(
-              "SFO",
-              style: TextStyle(
+            Text(
+              appState.getArrivalAirport.value.name,
+              style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                   color: Colors.pink),
@@ -140,12 +143,12 @@ class _FlightTicketsState extends State<FlightTickets> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "12 Sep - 15 Sep",
-                          style: TextStyle(color: Colors.white),
+                          "${appState.start!.value.day} ${getMonthName(dateTime: appState.start!.value)} - ${appState.end!.value.day} ${getMonthName(dateTime: appState.end!.value)}",
+                          style: const TextStyle(color: Colors.white),
                         ),
                         Text(
-                          "1 Adult, Economy",
-                          style: TextStyle(color: Colors.white),
+                          "${appState.getTravellers} Passenger, ${appState.selectedCabinaClass.value.name}",
+                          style: const TextStyle(color: Colors.white),
                         ),
                       ],
                     ),
@@ -155,9 +158,9 @@ class _FlightTicketsState extends State<FlightTickets> {
                     alignment: Alignment.bottomCenter,
                     decoration: BoxDecoration(
                       color: Colors.grey.shade200,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(45.0),
-                        topRight: Radius.circular(45.0),
+                      borderRadius: const BorderRadius.only(
+                        topLeft: const Radius.circular(45.0),
+                        topRight: const Radius.circular(45.0),
                       ),
                     ),
                     child: Padding(
@@ -168,11 +171,11 @@ class _FlightTicketsState extends State<FlightTickets> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text(
+                          const Text(
                             "18 Search Resulte",
                             style: TextStyle(color: Colors.black),
                           ),
-                          Icon(Icons.filter_list),
+                          const Icon(Icons.filter_list),
                         ],
                       ),
                     ),

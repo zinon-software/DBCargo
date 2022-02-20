@@ -1,11 +1,16 @@
 import 'dart:developer';
 
 import 'package:dpcargo/src/models/airport_model.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 import '../models/category.dart';
 
 class SearshController extends GetxController {
+
+  //Passinger
   RxInt _travellers = 0.obs;
 
   RxInt _adult = 0.obs;
@@ -52,6 +57,7 @@ class SearshController extends GetxController {
   }
 
   // Airport
+  
   Rx<AirportModel> _arrivalAirport =
       AirportModel(name: "BAS", city: "Mumbai").obs;
   Rx<AirportModel> _departureAirport =
@@ -96,4 +102,41 @@ class SearshController extends GetxController {
   // flying date
 
   Rx<DateTime>? start = DateTime.now().obs, end = DateTime.now().obs;
+
+  // cabina class
+
+  Rx<CabinaClassModel> selectedCabinaClass = CabinaClassModel(
+    ID: 0,
+    name: 'Economy',
+    icon: Icons.chair_alt,
+  ).obs;
+
+  void updateCabinaClass(CabinaClassModel selected) {
+    selectedCabinaClass.value = selected;
+  }
+
+  RxList cabinaClass = [
+    CabinaClassModel(
+      ID: 0,
+      name: 'Economy',
+      icon: Icons.chair_alt,
+    ),
+    CabinaClassModel(
+      ID: 1,
+      name: 'Business',
+      icon: FontAwesomeIcons.chair,
+    ),
+    CabinaClassModel(
+      ID: 2,
+      name: 'First',
+      icon: Icons.chair,
+    ),
+  ].obs;
+}
+
+class CabinaClassModel {
+  String name;
+  IconData icon;
+  int ID;
+  CabinaClassModel({required this.ID, required this.name, required this.icon});
 }

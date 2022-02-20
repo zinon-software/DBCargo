@@ -85,65 +85,6 @@ class FlyingDate extends StatelessWidget {
                       ;
   }
 
-  // Widget buildDateSelector(String title, DateTime dateTime) {
-  //   int month = dateTime.month;
-  //   final List MONTHS = [
-  //     "Jan",
-  //     "Feb",
-  //     "Mar",
-  //     "Apr",
-  //     "May",
-  //     "Jun",
-  //     "Jul",
-  //     "Aug",
-  //     "Sep",
-  //     "Oct",
-  //     "Nov",
-  //     "Dec"
-  //   ];
-  //   String mon = MONTHS[month - 1];
-  //   return Column(
-  //     children: <Widget>[
-  //       Expanded(
-  //         child: Text(
-  //           title,
-  //           style: GoogleFonts.overpass(fontSize: 12, color: Colors.black),
-  //         ),
-  //       ),
-  //       Expanded(
-  //         child: Row(
-  //           mainAxisAlignment: MainAxisAlignment.center,
-  //           crossAxisAlignment: CrossAxisAlignment.start,
-  //           children: <Widget>[
-  //             Text(
-  //               dateTime.day.toString().padLeft(2, '0'),
-  //               style: GoogleFonts.overpass(fontSize: 35),
-  //             ),
-  //             const SizedBox(
-  //               width: 8,
-  //             ),
-  //             Column(
-  //               crossAxisAlignment: CrossAxisAlignment.start,
-  //               mainAxisAlignment: MainAxisAlignment.center,
-  //               children: <Widget>[
-  //                 Text(
-  //                   '$mon ${dateTime.year.toString()}',
-  //                   style: GoogleFonts.overpass(fontSize: 10),
-  //                 ),
-  //                 Text(
-  //                   DateFormat(DateFormat.WEEKDAY).format(dateTime),
-  //                   style:
-  //                       GoogleFonts.overpass(fontSize: 10, color: Colors.black),
-  //                 ),
-  //               ],
-  //             )
-  //           ],
-  //         ),
-  //       )
-  //     ],
-  //   );
-  // }
-
   Future pickDateRange(BuildContext context) async {
     DateTimeRange? newDateTimeRange = await showDateRangePicker(
       context: context,
