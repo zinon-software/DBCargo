@@ -8,6 +8,7 @@ import '../../trips/home_trips/components/flight_airport.dart';
 import '../../trips/home_trips/components/flying_date.dart';
 import '../../trips/tickets/flight_tickets_view.dart';
 import '../../utilities/themeColors.dart';
+import '../../widgets/text_widget.dart';
 
 class HomeCargoView extends StatelessWidget {
   const HomeCargoView({Key? key}) : super(key: key);
@@ -358,18 +359,4 @@ class HomeCargoView extends StatelessWidget {
       ),
     );
   }
-
-  textWidget({String? text, Color? colors, double? size}) => Text(
-        text!,
-        style: TextStyle(color: colors, fontSize: size),
-      );
-
-  line({height, width}) => Container(
-        height: height,
-        width: width,
-        decoration: const BoxDecoration(
-          color: Colors.black26,
-          borderRadius: BorderRadius.all(Radius.circular(8.0)),
-        ),
-      );
 }

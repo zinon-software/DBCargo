@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 
+import '../../../widgets/text_widget.dart';
 import '../../tickets/flight_tickets_view.dart';
 
 class FlyingButtonSearch extends StatelessWidget {
@@ -9,10 +9,8 @@ class FlyingButtonSearch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return Flexible(
       child: Material(
-        color: Colors.grey[300],
-        shape: const CircleBorder(),
         clipBehavior: Clip.antiAlias,
         elevation: 16,
         child: InkWell(
@@ -21,37 +19,14 @@ class FlyingButtonSearch extends StatelessWidget {
           },
           splashColor: Colors.yellow,
           child: Container(
-            width: 100,
-            height: 100,
+            width: MediaQuery.of(context).size.width - 40,
+            height: 40,
             alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: Colors.grey[300],
-              borderRadius: BorderRadius.circular(12.0),
-              border: Border.all(
-                color: Colors.white.withOpacity(1.0),
-              ),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.shade600,
-                  offset: const Offset(4, 4),
-                  blurRadius: 15.0,
-                  spreadRadius: 1,
-                ),
-                const BoxShadow(
-                  color: Colors.white,
-                  offset: Offset(-4, -4),
-                  blurRadius: 15.0,
-                  spreadRadius: 1,
-                ),
-              ],
+            decoration: const BoxDecoration(
+              color: Color.fromARGB(255, 221, 56, 15),
+              borderRadius: BorderRadius.all(Radius.circular(8.0)),
             ),
-            child: Text(
-              "SEARCH",
-              style: GoogleFonts.overpass(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18),
-            ),
+            child: textWidget(text: "Search Flights", colors: Colors.white),
           ),
         ),
       ),

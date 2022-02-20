@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../utilities/themeColors.dart';
+import '../utilities/themeColors.dart';
 
 class SortingDetails extends StatefulWidget {
   const SortingDetails({Key? key}) : super(key: key);
@@ -22,23 +22,6 @@ class _SortingDetailsState extends State<SortingDetails> {
             decoration: BoxDecoration(
               // color: Colors.grey[200],
               borderRadius: BorderRadius.circular(10.0),
-              // border: Border.all(
-              //   color: Colors.white.withOpacity(1.0),
-              // ),
-              // boxShadow: [
-              //   BoxShadow(
-              //     color: Colors.grey.shade600,
-              //     offset: const Offset(4, 4),
-              //     blurRadius: 15.0,
-              //     spreadRadius: 1,
-              //   ),
-              //   const BoxShadow(
-              //     color: Colors.white,
-              //     offset: Offset(-4, -4),
-              //     blurRadius: 15.0,
-              //     spreadRadius: 1,
-              //   ),
-              // ],
             ),
             child: Padding(
               padding: const EdgeInsets.all(3.0),

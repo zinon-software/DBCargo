@@ -1,64 +1,66 @@
-
 import 'package:dpcargo/src/controllers/searsh_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../utilities/themeStyles.dart';
 import '../../../widgets/dropDown.dart';
+import '../../../widgets/text_widget.dart';
 
-class FlyingDetails extends StatelessWidget {
-  FlyingDetails({Key? key}) : super(key: key);
+class Passenger extends StatelessWidget {
+  Passenger({Key? key}) : super(key: key);
 
-  final SearshController searshController = Get.find();
+  final SearshController appState = Get.find();
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 90.0,
-      width: MediaQuery.of(context).size.width - 82,
-      decoration: BoxDecoration(
-        color: Colors.grey[300],
-        borderRadius: BorderRadius.circular(12.0),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.shade600,
-            offset: const Offset(4, 4),
-            blurRadius: 15.0,
-            spreadRadius: 1,
-          ),
-          const BoxShadow(
-            color: Colors.white,
-            offset: Offset(-4, -4),
-            blurRadius: 15.0,
-            spreadRadius: 1,
+    return GestureDetector(
+      onTap: () => buildShowModalBottomSheet(context),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          textWidget(text: "Passenger"),
+          const SizedBox(height: 8),
+          Obx(
+            () => Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Icon(
+                  Icons.people,
+                  color:
+                      (appState.getAdult == 0) ? Colors.black26 : Colors.black,
+                ),
+                appState.getAdult == 0
+                    ? textWidget(text: " Adult", colors: Colors.black26)
+                    : textWidget(
+                        text: "  ${appState.getAdult}", colors: Colors.black),
+                const SizedBox(width: 15),
+                FaIcon(
+                  FontAwesomeIcons.child,
+                  size: 20,
+                  color:
+                      (appState.getChild == 0) ? Colors.black26 : Colors.black,
+                ),
+                appState.getChild == 0
+                    ? textWidget(text: " Kids", colors: Colors.black26)
+                    : textWidget(
+                        text: "  ${appState.getChild}", colors: Colors.black),
+                const SizedBox(width: 15),
+                FaIcon(
+                  FontAwesomeIcons.baby,
+                  size: 20,
+                  color:
+                      (appState.getInfant == 0) ? Colors.black26 : Colors.black,
+                ),
+                appState.getInfant == 0
+                    ? textWidget(text: " Infant", colors: Colors.black26)
+                    : textWidget(
+                        text: "  ${appState.getInfant}", colors: Colors.black),
+              ],
+            ),
           ),
         ],
-      ),
-      child: Padding(
-        padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Expanded(
-              child: FlatButton(
-                onPressed: () => buildShowModalBottomSheet(context),
-                child: buildTravelersView(),
-              ),
-            ),
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text('Cabin class:', style: ThemeStyles.dropDownTextStyle),
-                  const SizedBox(width: 10.0),
-                  DropDown('First')
-                ],
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }
@@ -75,7 +77,7 @@ class FlyingDetails extends StatelessWidget {
         const SizedBox(width: 5.0),
         Obx(
           () => Text(
-            searshController.getTravellers.toString(),
+            appState.getTravellers.toString(),
             style: GoogleFonts.overpass(fontSize: 35),
           ),
         )
@@ -114,28 +116,28 @@ class FlyingDetails extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       buildQuantity(
-                        count: searshController.getAdult,
+                        count: appState.getAdult,
                         title: 'Adult',
-                        add: () => searshController.addAdult(),
-                        remove: () => searshController.removeAdult(),
+                        add: () => appState.addAdult(),
+                        remove: () => appState.removeAdult(),
                       ),
                       const SizedBox(
                         height: 5,
                       ),
                       buildQuantity(
-                        count: searshController.getChild,
+                        count: appState.getChild,
                         title: 'Child',
-                        add: () => searshController.addChild(),
-                        remove: () => searshController.removeChild(),
+                        add: () => appState.addChild(),
+                        remove: () => appState.removeChild(),
                       ),
                       const SizedBox(
                         height: 5,
                       ),
                       buildQuantity(
-                        count: searshController.getInfant,
+                        count: appState.getInfant,
                         title: "Infant",
-                        add: () => searshController.addInfant(),
-                        remove: () => searshController.removeInfant(),
+                        add: () => appState.addInfant(),
+                        remove: () => appState.removeInfant(),
                       ),
                     ],
                   ),

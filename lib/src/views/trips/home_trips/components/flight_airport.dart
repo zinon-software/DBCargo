@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import '../../../../controllers/searsh_controller.dart';
 import '../../../../models/airport_model.dart';
+import '../../../widgets/text_widget.dart';
 
 class FlightAirport extends StatefulWidget {
   const FlightAirport({Key? key}) : super(key: key);
@@ -13,143 +14,93 @@ class FlightAirport extends StatefulWidget {
 }
 
 class _FlightAirportState extends State<FlightAirport> {
-  final SearshController searshController = Get.find();
+      final SearshController appState = Get.find();
+
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 90.0,
-      width: MediaQuery.of(context).size.width - 82,
-      decoration: BoxDecoration(
-        color: Colors.grey[300],
-        borderRadius: BorderRadius.circular(12.0),
-        // border: Border.all(
-        //   color: Colors.white.withOpacity(1.0),
-        // ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.shade600,
-            offset: const Offset(4, 4),
-            blurRadius: 15.0,
-            spreadRadius: 1,
-          ),
-          const BoxShadow(
-            color: Colors.white,
-            offset: Offset(-4, -4),
-            blurRadius: 15.0,
-            spreadRadius: 1,
-          ),
-        ],
-      ),
-      child: Padding(
-        padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Expanded(
-              child: MaterialButton(
-                onPressed: () {
-                  Get.to(
-                    () => GetValueTextFilde(
-                      airportType: "departureAirport",
-                      searshController: searshController,
-                    ),
-                  );
-                },
-                child: Container(
-                  width: 110,
-                  height: MediaQuery.of(context).size.height,
-                  decoration: BoxDecoration(
-                    color: Colors.transparent,
-                    borderRadius: BorderRadius.circular(18.0),
-                  ),
-                  child: Obx(
-                    () {
-                      return Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
+    return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const FaIcon(
-                            FontAwesomeIcons.planeDeparture,
-                            size: 20,
+                          GestureDetector(
+                            onTap: () => Get.to(
+                              () => GetValueTextFilde(
+                                airportType: "departureAirport",
+                                searshController: appState,
+                              ),
+                            ),
+                            child: Obx(
+                              () => Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  textWidget(
+                                      text: "From", colors: Colors.black26),
+                                  textWidget(
+                                      text: appState
+                                          .getDepartureAirport.value.city,
+                                      size: 20),
+                                  textWidget(
+                                      text:
+                                          "(${appState.getDepartureAirport.value.name})"),
+                                  line(
+                                    height: 1.0,
+                                    width: 70.0,
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
-                          Text(
-                            searshController.getDepartureAirport.value.name,
-                            style: const TextStyle(color: Colors.black),
+                          Container(
+                            width: 40,
+                            height: 40,
+                            alignment: Alignment.center,
+                            decoration: const BoxDecoration(
+                                color: Color(0xFF64B5F6),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(14))),
+                            child: Obx(
+                              () => FaIcon(
+                                (appState.selectedCategory.value.categoryId ==
+                                        0)
+                                    ? Icons.trending_flat
+                                    : Icons.swap_horiz,
+                                size: 20,
+                                color: Colors.white,
+                              ),
+                            ),
                           ),
-                          Text(
-                            searshController.getDepartureAirport.value.city,
-                            style: const TextStyle(color: Colors.black),
+                          GestureDetector(
+                            onTap: () => Get.to(
+                              () => GetValueTextFilde(
+                                airportType: "arrivalAirport",
+                                searshController: appState,
+                              ),
+                            ),
+                            child: Obx(
+                              () => Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  textWidget(
+                                      text: "To", colors: Colors.black26),
+                                  textWidget(
+                                      text:
+                                          appState.getArrivalAirport.value.city,
+                                      size: 20),
+                                  textWidget(
+                                      text:
+                                          "(${appState.getArrivalAirport.value.name})"),
+                                  line(
+                                    height: 1.0,
+                                    width: 70.0,
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
                         ],
                       );
-                    },
-                  ),
-                ),
-              ),
-            ),
-            Obx(
-              () => Container(
-                width: 40,
-                height: 40,
-                alignment: Alignment.center,
-                decoration: const BoxDecoration(
-                    // color: Color(0xfff00d5d8),
-                    color: Colors.black,
-                    borderRadius: BorderRadius.all(Radius.circular(14))),
-                child: FaIcon(
-                  (searshController.selectedCategory.value.categoryId == 0)
-                      ? Icons.trending_flat
-                      : Icons.swap_horiz,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-            Expanded(
-              child: MaterialButton(
-                onPressed: () {
-                  Get.to(
-                    () => GetValueTextFilde(
-                      airportType: "arrivalAirport",
-                      searshController: searshController,
-                    ),
-                  );
-                },
-                child: Container(
-                  width: 110,
-                  height: MediaQuery.of(context).size.height,
-                  decoration: BoxDecoration(
-                    color: Colors.transparent,
-                    borderRadius: BorderRadius.circular(18.0),
-                  ),
-                  child: Obx(
-                    () {
-                      return Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const FaIcon(
-                            FontAwesomeIcons.planeArrival,
-                            size: 20,
-                          ),
-                          Text(
-                            searshController.getArrivalAirport.value.name,
-                            style: const TextStyle(color: Colors.black),
-                          ),
-                          Text(
-                            searshController.getArrivalAirport.value.city,
-                            style: const TextStyle(color: Colors.black),
-                          ),
-                        ],
-                      );
-                    },
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
   }
 }
 
