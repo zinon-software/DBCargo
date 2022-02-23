@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import '../../../controllers/trip_controller.dart';
 import '../../../models/category.dart';
 import '../../widgets/text_widget.dart';
+import '../tickets/flight_tickets_view.dart';
 import 'components/flight_airport.dart';
 import 'components/flying_button_search.dart';
 import 'components/flying_date.dart';
@@ -28,77 +29,84 @@ class HomeTripsView extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             child: Image.asset('assets/images/world_maps.png'),
           ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                height: MediaQuery.of(context).size.height - 500,
-                width: MediaQuery.of(context).size.width,
-                alignment: Alignment.bottomCenter,
-                margin: const EdgeInsets.symmetric(horizontal: 30),
-                child: Obx(
-                  () => Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      for (Category category in appState.categories)
-                        GestureDetector(
-                          child: textWidget(
-                              text:
+          SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                  height: MediaQuery.of(context).size.height - 500,
+                  width: MediaQuery.of(context).size.width,
+                  alignment: Alignment.bottomCenter,
+                  margin: const EdgeInsets.symmetric(horizontal: 30),
+                  child: Obx(
+                    () => Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        for (Category category in appState.categories)
+                          GestureDetector(
+                            child: textWidget(
+                                text: appState.selectedCategory.value
+                                            .categoryId ==
+                                        category.categoryId
+                                    ? category.name!.toUpperCase()
+                                    : category.name,
+                                colors: (appState.selectedCategory.value
+                                            .categoryId ==
+                                        category.categoryId)
+                                    ? Colors.white
+                                    : Colors.white60,
+                                size: (appState.selectedCategory.value
+                                            .categoryId ==
+                                        category.categoryId)
+                                    ? 20
+                                    : null),
+                            onTap: () {
+                              final isSelected =
                                   appState.selectedCategory.value.categoryId ==
-                                          category.categoryId
-                                      ? category.name!.toUpperCase()
-                                      : category.name,
-                              colors:
-                                  (appState.selectedCategory.value.categoryId ==
-                                          category.categoryId)
-                                      ? Colors.white
-                                      : Colors.white60,
-                              size:
-                                  (appState.selectedCategory.value.categoryId ==
-                                          category.categoryId)
-                                      ? 20
-                                      : null),
+                                      category.categoryId;
+                              if (!isSelected) {
+                                appState.updateCategory(category);
+                              }
+                            },
+                          )
+                      ],
+                    ),
+                  ),
+                ),
+                Container(
+                  height: 500,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(40.0),
+                      topRight: Radius.circular(40.0),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 30, vertical: 20),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        FlightAirport(),
+                        FlyingDate(),
+                        Passenger(),
+                        ClassCabina(),
+                        Nonstop(),
+                        FlyingButtonSearch(
+                          titel: "Search Flights",
                           onTap: () {
-                            final isSelected =
-                                appState.selectedCategory.value.categoryId ==
-                                    category.categoryId;
-                            if (!isSelected) {
-                              appState.updateCategory(category);
-                            }
+                            Get.to(() => const FlightTickets());
                           },
-                        )
-                    ],
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ),
-              Container(
-                height: 500,
-                width: MediaQuery.of(context).size.width,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(40.0),
-                    topRight: Radius.circular(40.0),
-                  ),
-                ),
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      FlightAirport(),
-                      FlyingDate(),
-                      Passenger(),
-                      ClassCabina(),
-                      Nonstop(),
-                      FlyingButtonSearch(),
-                    ],
-                  ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ],
       ),

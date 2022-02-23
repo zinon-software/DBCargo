@@ -67,7 +67,7 @@ class _SplashViewState extends State<SplashView> {
   void startTimer(BuildContext context) {
     Timer(
       const Duration(seconds: 6),
-      () => Get.offAll(() => const OnboardingView()),
+      () => Get.offAll(() => const HomeView()),
     );
   }
 }

@@ -1,14 +1,13 @@
 import 'package:get/get.dart';
 
 class OnBoardingControlller extends GetxController {
-    RxInt _currentIndex = 0.obs;
+  RxInt _currentIndex = 0.obs;
 
-    get getCurrentIndex => _currentIndex.value;
+  get getCurrentIndex => _currentIndex.value;
 
   void setCurrentIndex(int index) {
     _currentIndex.value = index;
   }
- 
 
   RxList data = [
     {
@@ -29,5 +28,11 @@ class OnBoardingControlller extends GetxController {
           'There are many variations of passages \nof Lorem Ipsum available, but the \nmajority have suffered alteration in \nsome form',
       'imageUrl': 'assets/images/onBoarding/image3.png',
     },
+  ].obs;
+
+  RxList<int> dataWidget = [
+    1,
+    2,
+    3,
   ].obs;
 }
