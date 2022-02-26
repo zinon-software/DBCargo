@@ -12,14 +12,20 @@ import '../../widgets/text_widget.dart';
 import '../favorite/favorite_cargo_view.dart';
 import '../product/product_cargo_view.dart';
 
-class HomeCargoView extends StatelessWidget {
+class HomeCargoView extends StatefulWidget {
   const HomeCargoView({Key? key}) : super(key: key);
+
+  @override
+  State<HomeCargoView> createState() => _HomeCargoViewState();
+}
+
+class _HomeCargoViewState extends State<HomeCargoView> {
+  CarouselController carouselController = CarouselController();
 
   @override
   Widget build(BuildContext context) {
     final SearshController appState = Get.find();
 
-    CarouselController carouselController = CarouselController();
     final OnBoardingControlller onBoardingControlller =
         Get.put(OnBoardingControlller());
 
@@ -113,7 +119,7 @@ class HomeCargoView extends StatelessWidget {
                       child: Stack(
                         children: [
                           CarouselSlider(
-                            items: onBoardingControlller.dataWidget
+                            items: [1, 2, 3]
                                 .map((item) => onboardingItem(item))
                                 .toList(),
                             options: CarouselOptions(
@@ -132,54 +138,72 @@ class HomeCargoView extends StatelessWidget {
                             alignment: Alignment.bottomRight,
                             child: Padding(
                               padding: const EdgeInsets.symmetric(vertical: 5),
-                              child: Container(
-                                color: const Color.fromARGB(255, 221, 56, 15),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    onBoardingControlller.getCurrentIndex == 0
-                                        ? const SizedBox()
-                                        : MaterialButton(
-                                            onPressed: () {
-                                              (onBoardingControlller
-                                                          .getCurrentIndex !=
-                                                      0)
-                                                  ? carouselController
-                                                      .previousPage()
-                                                  : null;
-                                            },
-                                            child: const Text(
-                                              "< Bake",
-                                              style: TextStyle(
-                                                  color: Colors.white),
-                                            ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  onBoardingControlller.getCurrentIndex == 0
+                                      ? const SizedBox()
+                                      : MaterialButton(
+                                          onPressed: () {
+                                            (onBoardingControlller
+                                                        .getCurrentIndex !=
+                                                    0)
+                                                ? carouselController
+                                                    .previousPage(
+                                                        duration:
+                                                            const Duration(
+                                                                milliseconds:
+                                                                    300),
+                                                        curve: Curves.linear)
+                                                : null;
+                                          },
+                                          child: Row(
+                                            children: const [
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                    bottom: 8.0),
+                                                child: Text(
+                                                  "←",
+                                                  style:
+                                                      TextStyle(fontSize: 20),
+                                                ),
+                                              ),
+                                              Text("Bake"),
+                                            ],
                                           ),
-                                    onBoardingControlller.getCurrentIndex == 2
-                                        ? MaterialButton(
-                                            onPressed: () {},
-                                            child: const Text(
-                                              "Finish",
-                                              style: TextStyle(
-                                                  color: Colors.white),
-                                            ))
-                                        : MaterialButton(
-                                            onPressed: () {
-                                              (onBoardingControlller
-                                                          .getCurrentIndex !=
-                                                      2)
-                                                  ? carouselController
-                                                      .nextPage()
-                                                  : null;
-                                            },
-                                            child: const Text(
-                                              "Next >",
-                                              style: TextStyle(
-                                                  color: Colors.white),
-                                            ),
+                                        ),
+                                  onBoardingControlller.getCurrentIndex == 2
+                                      ? MaterialButton(
+                                          onPressed: () {},
+                                          child: const Text("Finish"))
+                                      : MaterialButton(
+                                          onPressed: () {
+                                            (onBoardingControlller
+                                                        .getCurrentIndex !=
+                                                    2)
+                                                ? carouselController.nextPage(
+                                                    duration: const Duration(
+                                                        milliseconds: 300),
+                                                    curve: Curves.linear)
+                                                : null;
+                                          },
+                                          child: Row(
+                                            children: const [
+                                              Text("Next"),
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                    bottom: 8.0),
+                                                child: Text(
+                                                  "→",
+                                                  style:
+                                                      TextStyle(fontSize: 20),
+                                                ),
+                                              )
+                                            ],
                                           ),
-                                  ],
-                                ),
+                                        ),
+                                ],
                               ),
                             ),
                           ),
@@ -232,6 +256,29 @@ class HomeCargoView extends StatelessWidget {
               ],
             ),
           ),
+
+          // const SizedBox(
+          //   height: 10,
+          // ),
+          textWidget(text: "Shopping items", size: 20),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            child: FlyingButtonSearch(
+              titel: "Add a new shipment",
+              onTap: () {
+                Get.to(() => const ProductView());
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            child: FlyingButtonSearch(
+              titel: "Choose from Wish List",
+              onTap: () {
+                Get.to(() => const FavoriteView());
+              },
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),
             child: TextFormField(
@@ -254,28 +301,6 @@ class HomeCargoView extends StatelessWidget {
               style: const TextStyle(
                 fontFamily: "Poppins",
               ),
-            ),
-          ),
-          // const SizedBox(
-          //   height: 10,
-          // ),
-          textWidget(text: "Shopping items", size: 20),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0),
-            child: FlyingButtonSearch(
-              titel: "Add a new shipment",
-              onTap: () {
-                Get.to(() => const ProductView());
-              },
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0),
-            child: FlyingButtonSearch(
-              titel: "Choose from Wish List",
-              onTap: () {
-                Get.to(() => const FavoriteView());
-              },
             ),
           ),
           const SizedBox(

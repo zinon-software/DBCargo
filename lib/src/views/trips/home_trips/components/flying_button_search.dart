@@ -18,7 +18,7 @@ class FlyingButtonSearch extends StatelessWidget {
         splashColor: Colors.yellow,
         child: Container(
           width: MediaQuery.of(context).size.width - 40,
-          height: 40,
+          height: 36,
           alignment: Alignment.center,
           decoration: const BoxDecoration(
             color: Color.fromARGB(255, 221, 56, 15),

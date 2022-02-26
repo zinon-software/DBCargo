@@ -30,9 +30,4 @@ class OnBoardingControlller extends GetxController {
     },
   ].obs;
 
-  RxList<int> dataWidget = [
-    1,
-    2,
-    3,
-  ].obs;
 }

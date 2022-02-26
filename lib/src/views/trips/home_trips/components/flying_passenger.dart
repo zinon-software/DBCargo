@@ -155,7 +155,8 @@ class Passenger extends StatelessWidget {
       required int count,
       required VoidCallback add,
       required VoidCallback remove}) {
-    const style = TextStyle(fontWeight: FontWeight.bold, fontSize: 22);
+    const style = TextStyle(
+        fontWeight: FontWeight.bold, fontSize: 22, color: Colors.white);
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -174,17 +175,37 @@ class Passenger extends StatelessWidget {
               if (count >= 1)
                 MaterialButton(
                   minWidth: 60,
-                  child: const Text('—', style: style),
+                  child: Container(
+                      width: 40,
+                      height: 40,
+                      alignment: Alignment.center,
+                      decoration: const BoxDecoration(
+                          color: Color(0xFF64B5F6),
+                          borderRadius: BorderRadius.all(Radius.circular(14))),
+                      child: const Text('—', style: style)),
                   onPressed: remove,
                 )
               else
                 const SizedBox(
                   width: 20,
                 ),
-              Text(count.toString(), style: style),
+              Text(
+                count.toString(),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 22,
+                    color: Colors.black),
+              ),
               MaterialButton(
                 minWidth: 60,
-                child: const Text('+', style: style),
+                child: Container(
+                    width: 40,
+                    height: 40,
+                    alignment: Alignment.center,
+                    decoration: const BoxDecoration(
+                        color: Color(0xFF64B5F6),
+                        borderRadius: BorderRadius.all(Radius.circular(14))),
+                    child: const Text('+', style: style)),
                 onPressed: add,
               ),
             ],
