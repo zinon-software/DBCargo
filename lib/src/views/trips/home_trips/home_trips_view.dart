@@ -1,6 +1,6 @@
 import 'package:dpcargo/src/views/trips/home_trips/components/flight_nonstop.dart';
+import 'package:dpcargo/src/views/utilities/responsive.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import '../../../controllers/trip_controller.dart';
 import '../../../models/category.dart';
@@ -33,54 +33,68 @@ class HomeTripsView extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                Container(
-                  height: MediaQuery.of(context).size.height - 500,
-                  width: MediaQuery.of(context).size.width,
-                  alignment: Alignment.bottomCenter,
-                  margin: const EdgeInsets.symmetric(horizontal: 30),
-                  child: Obx(
-                    () => Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        for (Category category in appState.categories)
-                          GestureDetector(
-                            child: textWidget(
-                                text: appState.selectedCategory.value
-                                            .categoryId ==
-                                        category.categoryId
-                                    ? category.name!.toUpperCase()
-                                    : category.name,
-                                colors: (appState.selectedCategory.value
-                                            .categoryId ==
-                                        category.categoryId)
-                                    ? Colors.white
-                                    : Colors.white60,
-                                size: (appState.selectedCategory.value
-                                            .categoryId ==
-                                        category.categoryId)
-                                    ? 20
-                                    : null),
-                            onTap: () {
-                              final isSelected =
-                                  appState.selectedCategory.value.categoryId ==
-                                      category.categoryId;
-                              if (!isSelected) {
-                                appState.updateCategory(category);
-                              }
-                            },
-                          )
-                      ],
+                Center(
+                  child: Container(
+                    height: MediaQuery.of(context).size.height - 500,
+                    width: isMobile(context)
+                        ? MediaQuery.of(context).size.width
+                        : 350,
+                    alignment: Alignment.bottomCenter,
+                    margin: const EdgeInsets.symmetric(horizontal: 30),
+                    child: Obx(
+                      () => Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          for (Category category in appState.categories)
+                            GestureDetector(
+                              child: textWidget(
+                                  text: appState.selectedCategory.value
+                                              .categoryId ==
+                                          category.categoryId
+                                      ? category.name!.toUpperCase()
+                                      : category.name,
+                                  colors: (appState.selectedCategory.value
+                                              .categoryId ==
+                                          category.categoryId)
+                                      ? Colors.white
+                                      : Colors.white60,
+                                  size: (appState.selectedCategory.value
+                                              .categoryId ==
+                                          category.categoryId)
+                                      ? 20
+                                      : null),
+                              onTap: () {
+                                final isSelected = appState
+                                        .selectedCategory.value.categoryId ==
+                                    category.categoryId;
+                                if (!isSelected) {
+                                  appState.updateCategory(category);
+                                }
+                              },
+                            )
+                        ],
+                      ),
                     ),
                   ),
                 ),
                 Container(
-                  height: 500,
-                  width: MediaQuery.of(context).size.width,
-                  decoration: const BoxDecoration(
+                  height: isMobile(context)
+                      ? 500
+                      : MediaQuery.of(context).size.height - 300,
+                  width: isMobile(context)
+                      ? MediaQuery.of(context).size.width
+                      : 400,
+                  decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(40.0),
-                      topRight: Radius.circular(40.0),
+                      topLeft: Radius.circular(25.0),
+                      topRight: Radius.circular(25.0),
+                      bottomLeft: isMobile(context)
+                          ? Radius.circular(0.0)
+                          : Radius.circular(25.0),
+                      bottomRight: isMobile(context)
+                          ? Radius.circular(0.0)
+                          : Radius.circular(25.0),
                     ),
                   ),
                   child: Padding(
@@ -90,11 +104,11 @@ class HomeTripsView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        FlightAirport(),
+                        const FlightAirport(),
                         FlyingDate(),
                         Passenger(),
                         ClassCabina(),
-                        Nonstop(),
+                        const Nonstop(),
                         FlyingButtonSearch(
                           titel: "Search Flights",
                           onTap: () {
@@ -104,7 +118,7 @@ class HomeTripsView extends StatelessWidget {
                       ],
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ),

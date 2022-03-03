@@ -279,30 +279,6 @@ class _HomeCargoViewState extends State<HomeCargoView> {
               },
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10),
-            child: TextFormField(
-              decoration: InputDecoration(
-                labelText: "Enter Cargo Name",
-                fillColor: Colors.white,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15.0),
-                  borderSide: const BorderSide(),
-                ),
-              ),
-              validator: (val) {
-                if (val!.isEmpty) {
-                  return "Email cannot be empty";
-                } else {
-                  return null;
-                }
-              },
-              keyboardType: TextInputType.text,
-              style: const TextStyle(
-                fontFamily: "Poppins",
-              ),
-            ),
-          ),
           const SizedBox(
             height: 30,
           ),

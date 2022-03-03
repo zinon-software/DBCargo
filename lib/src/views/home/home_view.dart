@@ -26,40 +26,33 @@ class HomeView extends StatelessWidget {
               WidgetStraggeredGridView(),
             ],
           ),
-          tab: Row(
-            // crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Expanded(
-                child: Column(
-                  children: [
-                    WidgetTitle(),
-                    WidgetStraggeredGridView(),
-                  ],
-                ),
-              ),
-              Expanded(child: WidgetBanner()),
-            ],
+          tab: tabAndDesktopBannerWidget(size),
+          desktop: tabAndDesktopBannerWidget(size),
+        ),
+      ),
+    );
+  }
+
+  Row tabAndDesktopBannerWidget(Size size) {
+    return Row(
+      // crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Expanded(
+          child: Container(
+            height: size.height,
+            color: Color(0xFF64B5F6),
+            child: WidgetBanner(),
           ),
-          desktop: Row(
-            // crossAxisAlignment: CrossAxisAlignment.stretch,
+        ),
+        Expanded(
+          child: Column(
             children: [
-              Expanded(
-                child: Column(
-                  children: [
-                    WidgetTitle(),
-                    WidgetStraggeredGridView(),
-                  ],
-                ),
-              ),
-              Expanded(
-                  child: Container(
-                      height: size.height,
-                      color: Color(0xFF64B5F6),
-                      child: WidgetBanner())),
+              WidgetTitle(),
+              WidgetStraggeredGridView(),
             ],
           ),
         ),
-      ),
+      ],
     );
   }
 }
@@ -83,15 +76,13 @@ class _WidgetBannerState extends State<WidgetBanner> {
           alignment: Alignment.bottomCenter,
           decoration: const BoxDecoration(
             color: Color(0xFF64B5F6),
-            image: DecorationImage(
-              image: AssetImage('assets/images/homePage/banners.png'),
-              fit: BoxFit.fill,
-            ),
+            
             borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(40),
-              bottomRight: Radius.circular(40),
+              bottomLeft: Radius.circular(25),
+              bottomRight: Radius.circular(25),
             ),
           ),
+          child: Image.asset('assets/images/homePage/banners.png'),
         ),
         Padding(
           padding: const EdgeInsets.only(top: 30, left: 20, right: 20),
@@ -162,7 +153,7 @@ class _WidgetBannerState extends State<WidgetBanner> {
                 ],
               ),
               const SizedBox(
-                height: 80,
+                height: 10,
               ),
               Text(
                 "Tracking Your Package",

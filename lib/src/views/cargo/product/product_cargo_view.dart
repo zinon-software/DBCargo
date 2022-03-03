@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 
 import '../../trips/home_trips/components/flight_nonstop.dart';
 import '../../trips/home_trips/components/flying_button_search.dart';
+import '../../utilities/themeStyles.dart';
+import '../../widgets/dropDown.dart';
 
 class ProductView extends StatelessWidget {
   const ProductView({Key? key}) : super(key: key);
@@ -13,7 +15,7 @@ class ProductView extends StatelessWidget {
     return Scaffold(
       // extendBodyBehindAppBar: true,
       appBar: AppBar(
-        // elevation: 0,
+        elevation: 0,
         backgroundColor: const Color(0xFF64B5F6),
         leading: IconButton(
           icon: const Icon(
@@ -119,182 +121,208 @@ class ProductView extends StatelessWidget {
       ),
       backgroundColor: Colors.grey.shade200,
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text("تفاصسل المنتج"),
-              SizedBox(height: 12),
-              TextFormField(
-                cursorColor: Theme.of(context).cursorColor,
-                initialValue: 'Input text',
-                keyboardType: TextInputType.url,
-                decoration: InputDecoration(
-                  icon: Icon(Icons.link),
-                  suffixIcon: Icon(
-                    Icons.paste,
-                  ),
-                ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              height: 40,
+              alignment: Alignment.bottomCenter,
+              decoration: const BoxDecoration(
+                color: Color(0xFF64B5F6),
               ),
-              SizedBox(height: 12),
-              TextFormField(
-                decoration: InputDecoration(
-                  labelText: "Enter Cargo Name",
-                  fillColor: Colors.white,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15.0),
-                    borderSide: const BorderSide(),
-                  ),
-                ),
-                validator: (val) {
-                  if (val!.isEmpty) {
-                    return "Email cannot be empty";
-                  } else {
-                    return null;
-                  }
-                },
-                keyboardType: TextInputType.text,
-                style: const TextStyle(
-                  fontFamily: "Poppins",
-                ),
-              ),
-              SizedBox(height: 12),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "title",
-                    style: const TextStyle(
-                        fontSize: 30, fontWeight: FontWeight.bold),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.all(Radius.circular(24)),
-                      border: Border.all(color: Colors.black26),
-                    ),
-                    child: Row(
-                      children: [
-                        if (1 >= 1)
-                          MaterialButton(
-                            minWidth: 60,
-                            child: Container(
-                              width: 40,
-                              height: 40,
-                              alignment: Alignment.center,
-                              decoration: const BoxDecoration(
-                                  color: Color(0xFF64B5F6),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(14))),
-                              child: const Text(
-                                '—',
-                              ),
-                            ),
-                            onPressed: () {},
-                          )
-                        else
-                          const SizedBox(
-                            width: 20,
-                          ),
-                        Text("1"),
-                        MaterialButton(
-                          minWidth: 60,
-                          child: Container(
-                              width: 40,
-                              height: 40,
-                              alignment: Alignment.center,
-                              decoration: const BoxDecoration(
-                                  color: Color(0xFF64B5F6),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(14))),
-                              child: const Text('+')),
-                          onPressed: () {},
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 12),
-              Row(
-                children: [
-                  Expanded(
-                    child: TextFormField(
-                      cursorColor: Theme.of(context).cursorColor,
-                      initialValue: 'Input text',
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                        icon: Icon(FontAwesomeIcons.dollarSign),
-                      ),
-                    ),
-                  ),
-                  Text("المجموع (5)"),
-                ],
-              ),
-              SizedBox(height: 12),
-              Row(
-                children: [
-                  Expanded(
-                    child: TextFormField(
-                      cursorColor: Theme.of(context).cursorColor,
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                        icon: Icon(FontAwesomeIcons.weight),
-                      ),
-                    ),
-                  ),
-                  Text("المجموع (5)"),
-                ],
-              ),
-              SizedBox(height: 12),
-              Text("الفئة"),
-              SizedBox(height: 12),
-              TextFormField(
-                decoration: InputDecoration(
-                  labelText: "Enter Cargo Name",
-                  fillColor: Colors.white,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15.0),
-                    borderSide: const BorderSide(),
-                  ),
-                ),
-                validator: (val) {
-                  if (val!.isEmpty) {
-                    return "Email cannot be empty";
-                  } else {
-                    return null;
-                  }
-                },
-                keyboardType: TextInputType.text,
-                style: const TextStyle(
-                  fontFamily: "Poppins",
-                ),
-              ),
-              SizedBox(height: 12),
-              Text("صور الشحنة"),
-              SizedBox(height: 12),
-              Container(
-                width: 80,
-                height: 80,
-                alignment: Alignment.center,
+              child: Container(
+                height: 35,
+                alignment: Alignment.bottomCenter,
                 decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(Radius.circular(5)),
-                  border: Border.all(color: const Color(0xFF64B5F6)),
+                  color: Colors.grey.shade200,
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(45.0),
+                    topRight: Radius.circular(45.0),
+                  ),
                 ),
-                child: Icon(
-                  Icons.camera_alt,
-                  color: Color(0xFF64B5F6),
+                child: const Text(
+                  "تفاصسل المنتج",
+                  style: TextStyle(color: Colors.black),
                 ),
               ),
-              SizedBox(height: 12),
-              Nonstop(),
-              SizedBox(height: 12),
-              FlyingButtonSearch(
-                titel: "Favorite",
-                onTap: () {},
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+              child: Column(
+                // mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 12),
+                  TextFormField(
+                    cursorColor: Theme.of(context).cursorColor,
+                    keyboardType: TextInputType.url,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                        borderSide: const BorderSide(),
+                      ),
+                      icon: const Icon(
+                        Icons.paste,
+                      ),
+                      suffixIcon: const Icon(Icons.link),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      labelText: "Enter Cargo Name",
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                        borderSide: const BorderSide(),
+                      ),
+                    ),
+                    validator: (val) {
+                      if (val!.isEmpty) {
+                        return "Email cannot be empty";
+                      } else {
+                        return null;
+                      }
+                    },
+                    keyboardType: TextInputType.text,
+                    style: const TextStyle(
+                      fontFamily: "Poppins",
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        "title",
+                        style: TextStyle(
+                            fontSize: 30, fontWeight: FontWeight.bold),
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(24)),
+                          border: Border.all(color: Colors.black26),
+                        ),
+                        child: Row(
+                          children: [
+                            if (1 >= 1)
+                              MaterialButton(
+                                minWidth: 60,
+                                child: Container(
+                                  width: 40,
+                                  height: 40,
+                                  alignment: Alignment.center,
+                                  decoration: const BoxDecoration(
+                                      color: Color(0xFF64B5F6),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(14))),
+                                  child: const Text(
+                                    '—',
+                                  ),
+                                ),
+                                onPressed: () {},
+                              )
+                            else
+                              const SizedBox(
+                                width: 20,
+                              ),
+                            const Text("1"),
+                            MaterialButton(
+                              minWidth: 60,
+                              child: Container(
+                                  width: 40,
+                                  height: 40,
+                                  alignment: Alignment.center,
+                                  decoration: const BoxDecoration(
+                                      color: Color(0xFF64B5F6),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(14))),
+                                  child: const Text('+')),
+                              onPressed: () {},
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 12),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextFormField(
+                          cursorColor: Theme.of(context).cursorColor,
+                          initialValue: '1.0',
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8.0),
+                              borderSide: const BorderSide(),
+                            ),
+                            suffixIcon: const Icon(FontAwesomeIcons.dollarSign),
+                          ),
+                        ),
+                      ),
+                      const Text("المجموع (5)"),
+                    ],
+                  ),
+                  const SizedBox(height: 12),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextFormField(
+                          cursorColor: Theme.of(context).cursorColor,
+                          initialValue: '1.0',
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8.0),
+                              borderSide: const BorderSide(),
+                            ),
+                            suffixIcon: const Icon(FontAwesomeIcons.weight),
+                          ),
+                        ),
+                      ),
+                      const Text("المجموع (5)"),
+                    ],
+                  ),
+                  const SizedBox(height: 12),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text('الفئة:',
+                          style: ThemeStyles.dropDownTextStyle),
+                      const SizedBox(width: 10.0),
+                      DropDown('First')
+                    ],
+                  ),
+                  const SizedBox(height: 12),
+                  const Text("صور الشحنة"),
+                  const SizedBox(height: 12),
+                  Container(
+                    width: 80,
+                    height: 80,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(Radius.circular(5)),
+                      border: Border.all(color: const Color(0xFF64B5F6)),
+                    ),
+                    child: const Icon(
+                      Icons.camera_alt,
+                      color: Color(0xFF64B5F6),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  const Nonstop(),
+                  const SizedBox(height: 12),
+                  FlyingButtonSearch(
+                    titel: "Favorite",
+                    onTap: () {},
+                  ),
+                ],
               ),
-            ],
-          ),
+            )
+          ],
         ),
       ),
     );
