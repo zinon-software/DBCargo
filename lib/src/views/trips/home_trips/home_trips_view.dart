@@ -1,4 +1,5 @@
-import 'package:dpcargo/src/views/trips/home_trips/components/flight_nonstop.dart';
+import 'package:dpcargo/src/views/utilities/themeColors.dart';
+import 'package:dpcargo/src/views/widgets/switch_widget.dart';
 import 'package:dpcargo/src/views/utilities/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,7 +22,7 @@ class HomeTripsView extends StatelessWidget {
   Widget build(BuildContext context) {
     final SearshController appState = Get.find();
     return Scaffold(
-      backgroundColor: const Color(0xFF64B5F6),
+      backgroundColor: ThemeColors.backgroundColor,
       body: Stack(
         children: <Widget>[
           SizedBox(
@@ -108,7 +109,9 @@ class HomeTripsView extends StatelessWidget {
                         FlyingDate(),
                         Passenger(),
                         ClassCabina(),
-                        const Nonstop(),
+                        const Nonstop(
+                          titel: "Save to Wishlist",
+                        ),
                         FlyingButtonSearch(
                           titel: "Search Flights",
                           onTap: () {

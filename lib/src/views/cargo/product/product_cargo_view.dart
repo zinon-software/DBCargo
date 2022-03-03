@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
-import '../../trips/home_trips/components/flight_nonstop.dart';
+import '../../widgets/switch_widget.dart';
 import '../../trips/home_trips/components/flying_button_search.dart';
 import '../../utilities/themeStyles.dart';
 import '../../widgets/dropDown.dart';
@@ -141,7 +141,7 @@ class ProductView extends StatelessWidget {
                   ),
                 ),
                 child: const Text(
-                  "تفاصسل المنتج",
+                  "Product details",
                   style: TextStyle(color: Colors.black),
                 ),
               ),
@@ -149,7 +149,6 @@ class ProductView extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
               child: Column(
-                // mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 12),
@@ -157,6 +156,7 @@ class ProductView extends StatelessWidget {
                     cursorColor: Theme.of(context).cursorColor,
                     keyboardType: TextInputType.url,
                     decoration: InputDecoration(
+                      labelText: "product link",
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8.0),
                         borderSide: const BorderSide(),
@@ -170,7 +170,7 @@ class ProductView extends StatelessWidget {
                   const SizedBox(height: 12),
                   TextFormField(
                     decoration: InputDecoration(
-                      labelText: "Enter Cargo Name",
+                      labelText: "product name",
                       fillColor: Colors.white,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8.0),
@@ -179,7 +179,7 @@ class ProductView extends StatelessWidget {
                     ),
                     validator: (val) {
                       if (val!.isEmpty) {
-                        return "Email cannot be empty";
+                        return "name cannot be empty";
                       } else {
                         return null;
                       }
@@ -194,9 +194,9 @@ class ProductView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
-                        "title",
+                        "Product quantity",
                         style: TextStyle(
-                            fontSize: 30, fontWeight: FontWeight.bold),
+                            fontSize: 12, fontWeight: FontWeight.bold),
                       ),
                       Container(
                         decoration: BoxDecoration(
@@ -252,7 +252,7 @@ class ProductView extends StatelessWidget {
                       Expanded(
                         child: TextFormField(
                           cursorColor: Theme.of(context).cursorColor,
-                          initialValue: '1.0',
+                          initialValue: '10.0',
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
@@ -263,11 +263,13 @@ class ProductView extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const Text("المجموع (5)"),
+                      const SizedBox(width: 5),
+                      const Text("Total (5)"),
                     ],
                   ),
                   const SizedBox(height: 12),
                   Row(
+                    // mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Expanded(
                         child: TextFormField(
@@ -283,21 +285,21 @@ class ProductView extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const Text("المجموع (5)"),
+                      const SizedBox(width: 5),
+                      const Text("Total (5)"),
                     ],
                   ),
                   const SizedBox(height: 12),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
-                      Text('الفئة:',
-                          style: ThemeStyles.dropDownTextStyle),
+                      Text('Categories:', style: ThemeStyles.dropDownTextStyle),
                       const SizedBox(width: 10.0),
-                      DropDown('First')
+                      Expanded(child: DropDown('food'))
                     ],
                   ),
                   const SizedBox(height: 12),
-                  const Text("صور الشحنة"),
+                  const Text("Shipment Pictures"),
                   const SizedBox(height: 12),
                   Container(
                     width: 80,
@@ -313,11 +315,11 @@ class ProductView extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 12),
-                  const Nonstop(),
+                  const Nonstop(titel: "Save to Wishlist"),
                   const SizedBox(height: 12),
                   FlyingButtonSearch(
-                    titel: "Favorite",
-                    onTap: () {},
+                    titel: "Okay",
+                    onTap: () => Get.back(),
                   ),
                 ],
               ),

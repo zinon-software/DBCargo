@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../../widgets/text_widget.dart';
+import 'text_widget.dart';
 
 class Nonstop extends StatefulWidget {
-  const Nonstop({Key? key}) : super(key: key);
+  final String titel; 
+  const Nonstop({Key? key, required this.titel}) : super(key: key);
 
   @override
   State<Nonstop> createState() => _NonstopState();
@@ -17,7 +18,7 @@ class _NonstopState extends State<Nonstop> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         textWidget(
-          text: "Nonstop flights first",
+          text: widget.titel,
           colors: Colors.black,
         ),
         Switch(

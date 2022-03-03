@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dpcargo/src/views/onboarding/onboarding_view.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import '../../../controllers/onboarding_controller.dart';
 import '../../../controllers/trip_controller.dart';
@@ -33,7 +34,7 @@ class _HomeCargoViewState extends State<HomeCargoView> {
       if (item == 1) {
         return onePage(context, appState);
       } else if (item == 2) {
-        return towPage();
+        return twoPage();
       } else {
         return threePage();
       }
@@ -105,15 +106,10 @@ class _HomeCargoViewState extends State<HomeCargoView> {
                   ),
                 ),
                 Container(
+                  color: Colors.grey[200],
                   height: 500,
                   width: MediaQuery.of(context).size.width,
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(40.0),
-                      topRight: Radius.circular(40.0),
-                    ),
-                  ),
+
                   child: Obx(
                     () => Center(
                       child: Stack(
@@ -287,45 +283,86 @@ class _HomeCargoViewState extends State<HomeCargoView> {
     );
   }
 
-  towPage() {
+  twoPage() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 30),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          TextField(
-            decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.grey[200],
-                labelText: "cargo name",
-                hintText: "Enter your text here"),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text("عنوان الشحنة"),
+              Row(
+                children: [
+                  const Text(
+                    "SFO",
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.pink),
+                  ),
+                  const SizedBox(width: 16),
+                  Center(
+                      child: Transform.rotate(
+                    angle: 1.5,
+                    child: Icon(
+                      Icons.local_airport,
+                      color: Colors.indigo.shade300,
+                      size: 24,
+                    ),
+                  )),
+                  const SizedBox(width: 16),
+                  const Text(
+                    "SFO",
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.pink),
+                  ),
+                ],
+              ),
+            ],
           ),
-          TextField(
-            minLines: 2,
-            maxLines: null,
-            keyboardType: TextInputType.multiline,
-            decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.grey[200],
-                labelText: 'Description',
-                hintText: '描述下发生的'),
+          SizedBox(height: 20),
+          const Text("data"),
+          SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: const [
+              Text("Total orders"),
+              Text("9"),
+            ],
           ),
-          FlyingButtonSearch(
-            titel: "Favorite",
-            onTap: () {
-              Get.to(() => const FlightTickets());
-            },
+          SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: const [
+              Text("Total weight"),
+              Text("9"),
+            ],
           ),
-          FlyingButtonSearch(
-            titel: "add product",
-            onTap: () {
-              Get.to(() => const FlightTickets());
-            },
+          SizedBox(height: 20),
+          Image.asset(
+            "assets/images/barcode.jpg",
           ),
-          const SizedBox(
-            height: 5,
-          ),
+          // MediaQuery.removePadding(
+  //   context: context,
+  //   removeTop: true,
+  //   child: GridView.builder(
+  //     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+  //       crossAxisCount: 3,
+  //     ),
+  //     itemCount: 5,
+  //     itemBuilder: (BuildContext context, int index) {
+  //       return Card(
+  //         color: Colors.amber,
+  //         child: Center(child: Text('$index')),
+  //       );
+  //     }
+  //   ),
+  // )
         ],
       ),
     );

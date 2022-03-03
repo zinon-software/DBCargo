@@ -14,10 +14,10 @@ class _DropDownState extends State<DropDown> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(5),
+      margin: const EdgeInsets.all(5),
       decoration: BoxDecoration(
         color: Colors.grey[100],
-        borderRadius: BorderRadius.circular(15.0),
+        borderRadius: BorderRadius.circular(5.0),
         boxShadow: const [
           BoxShadow(
             blurRadius: 16.0,
@@ -31,24 +31,24 @@ class _DropDownState extends State<DropDown> {
           ),
         ],
       ),
-      height: 30.0,
+      height: 50,
+      width: MediaQuery.of(context).size.width,
       child: Padding(
         padding: const EdgeInsets.only(
             top: 8.0, bottom: 8.0, left: 10.0, right: 10.0),
         child: DropdownButton<String>(
-          dropdownColor: ThemeColors.greenLight,
+          dropdownColor: ThemeColors.backgroundColor,
           value: widget.dropDownValue,
           icon: const Icon(
             Icons.arrow_downward_outlined,
-            size: 12.0,
-            color: Colors.black,
+            size: 18.0,
           ),
           onChanged: (String? newValue) {
             setState(() {
               widget.dropDownValue = newValue!;
             });
           },
-          items: <String>['First', 'Business', 'Economy']
+          items: <String>['food', 'book', 'Economy']
               .map<DropdownMenuItem<String>>((String newValue) {
             return DropdownMenuItem<String>(
               value: newValue,
