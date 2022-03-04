@@ -1,601 +1,553 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:get/get.dart';
 
-class FavoriteView extends StatelessWidget {
+import '../../../controllers/onboarding_controller.dart';
+import '../../../controllers/trip_controller.dart';
+import '../../onboarding/onboarding_view.dart';
+import '../../trips/home_trips/components/flight_airport.dart';
+import '../../trips/home_trips/components/flying_button_search.dart';
+import '../../widgets/pickDate_widget.dart';
+import '../../widgets/text_widget.dart';
+import '../product/product_cargo_view.dart';
+
+class FavoriteView extends StatefulWidget {
   const FavoriteView({Key? key}) : super(key: key);
 
   @override
+  State<FavoriteView> createState() => _FavoriteViewState();
+}
+
+class _FavoriteViewState extends State<FavoriteView> {
+  bool valueChek = false;
+  CarouselController carouselController = CarouselController();
+
+  @override
   Widget build(BuildContext context) {
+    final SearshController appState = Get.find();
+
+    final OnBoardingControlller onBoardingControlller =
+        Get.put(OnBoardingControlller());
+
+    Widget onboardingItem(int item) {
+      if (item == 1) {
+        return onePage(context, appState);
+      } else if (item == 2) {
+        return twoPage();
+      } else {
+        return threePage();
+      }
+    }
+
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: SingleChildScrollView(
+      backgroundColor: const Color(0xFF64B5F6),
+      body: CustomScrollView(
+        slivers: <Widget>[
+          SliverAppBar(
+            expandedHeight: MediaQuery.of(context).size.height - 500,
+            stretch: true,
+            pinned: true,
+            flexibleSpace: FlexibleSpaceBar(
+              background: Stack(
+                children: [
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height - 450,
+                    width: MediaQuery.of(context).size.width,
+                    child: Image.asset('assets/images/world_maps.png'),
+                  ),
+                  Container(
+                    height: MediaQuery.of(context).size.height - 500,
+                    width: MediaQuery.of(context).size.width,
+                    alignment: Alignment.bottomCenter,
+                    margin: const EdgeInsets.symmetric(horizontal: 30),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Obx(
+                        () => Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              height: 10,
+                              width: 10,
+                              decoration: BoxDecoration(
+                                color:
+                                    onBoardingControlller.getCurrentIndex == 0
+                                        ? Colors.orange
+                                        : kSubtitleColor,
+                                shape: BoxShape.circle,
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Container(
+                              height: 10,
+                              width: 10,
+                              decoration: BoxDecoration(
+                                color:
+                                    onBoardingControlller.getCurrentIndex == 1
+                                        ? Colors.orange
+                                        : kSubtitleColor,
+                                shape: BoxShape.circle,
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Container(
+                              height: 10,
+                              width: 10,
+                              decoration: BoxDecoration(
+                                color:
+                                    onBoardingControlller.getCurrentIndex == 2
+                                        ? Colors.orange
+                                        : kSubtitleColor,
+                                shape: BoxShape.circle,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          SliverList(
+            delegate: SliverChildListDelegate(
+              [
+                Container(
+                  color: Colors.grey[200],
+                  height: 500,
+                  width: MediaQuery.of(context).size.width,
+
+                  child: Obx(
+                    () => Center(
+                      child: Stack(
+                        children: [
+                          CarouselSlider(
+                            items: [1, 2, 3]
+                                .map((item) => onboardingItem(item))
+                                .toList(),
+                            options: CarouselOptions(
+                              initialPage:
+                                  onBoardingControlller.getCurrentIndex,
+                              height: double.infinity,
+                              enableInfiniteScroll: false,
+                              viewportFraction: 1,
+                              onPageChanged: (index, reason) {
+                                onBoardingControlller.setCurrentIndex(index);
+                              },
+                            ),
+                            carouselController: carouselController,
+                          ),
+                          Align(
+                            alignment: Alignment.bottomRight,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 5),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  onBoardingControlller.getCurrentIndex == 0
+                                      ? const SizedBox()
+                                      : MaterialButton(
+                                          onPressed: () {
+                                            (onBoardingControlller
+                                                        .getCurrentIndex !=
+                                                    0)
+                                                ? carouselController
+                                                    .previousPage(
+                                                        duration:
+                                                            const Duration(
+                                                                milliseconds:
+                                                                    300),
+                                                        curve: Curves.linear)
+                                                : null;
+                                          },
+                                          child: Row(
+                                            children: const [
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                    bottom: 8.0),
+                                                child: Text(
+                                                  "←",
+                                                  style:
+                                                      TextStyle(fontSize: 20),
+                                                ),
+                                              ),
+                                              Text("Bake"),
+                                            ],
+                                          ),
+                                        ),
+                                  onBoardingControlller.getCurrentIndex == 2
+                                      ? MaterialButton(
+                                          onPressed: () {},
+                                          child: const Text("Finish"))
+                                      : MaterialButton(
+                                          onPressed: () {
+                                            (onBoardingControlller
+                                                        .getCurrentIndex !=
+                                                    2)
+                                                ? carouselController.nextPage(
+                                                    duration: const Duration(
+                                                        milliseconds: 300),
+                                                    curve: Curves.linear)
+                                                : null;
+                                          },
+                                          child: Row(
+                                            children: const [
+                                              Text("Next"),
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                    bottom: 8.0),
+                                                child: Text(
+                                                  "→",
+                                                  style:
+                                                      TextStyle(fontSize: 20),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  // ,
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  onePage(BuildContext context, SearshController appState) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      child: Container(
+        color: Colors.white,
+        padding: const EdgeInsets.all(10),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const WidgetBanner(),
-            const WidgetTitle(),
-            const WidgetStraggeredGridView(),
+            const FlightAirport(),
+            const SizedBox(height: 10),
+            GestureDetector(
+              onTap: () => pickDate(context, appState),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  textWidget(text: "Depart"),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      const Icon(Icons.date_range),
+                      Obx(
+                        () => textWidget(
+                            text:
+                                "${appState.start!.value.year}/${appState.start!.value.month}/${appState.start!.value.day}"),
+                      ),
+                    ],
+                  ),
+                  line(
+                    height: 1.0,
+                    width: 70.0,
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 10),
+            textWidget(text: "Shopping items", size: 20),
+            for (var i = 0; i < 2; i++)
+              Expanded(
+                child: Card(
+                  color: Colors.amber,
+                  child: Container(
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(Radius.circular(5)),
+                      border: Border.all(color: const Color(0xFF64B5F6)),
+                    ),
+                    height: 80,
+                    child: const Icon(
+                      Icons.camera_alt,
+                      color: Color(0xFF64B5F6),
+                    ),
+                  ),
+                ),
+              ),
+            const SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+              child: FlyingButtonSearch(
+                titel: "Add a new shipment",
+                onTap: () {
+                  Get.to(() => const ProductView());
+                },
+              ),
+            ),
+            const SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+              child: FlyingButtonSearch(
+                titel: "Choose from Wish List",
+                onTap: () {
+                  Get.to(() => const FavoriteView());
+                },
+              ),
+            ),
+            const SizedBox(height: 18),
           ],
         ),
       ),
     );
   }
-}
 
-class WidgetBanner extends StatefulWidget {
-  const WidgetBanner({Key? key}) : super(key: key);
-
-  @override
-  _WidgetBannerState createState() => _WidgetBannerState();
-}
-
-class _WidgetBannerState extends State<WidgetBanner> {
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          height: 380,
-          decoration: const BoxDecoration(
-            color: Color(0xFF64B5F6),
-            image: DecorationImage(
-              image: AssetImage('assets/images/homePage/banners.png'),
-              fit: BoxFit.fill,
+  twoPage() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 30),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            padding: const EdgeInsets.all(16),
+            decoration: const BoxDecoration(
+              color: Colors.white,
+              // ),
             ),
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(40),
-              bottomRight: Radius.circular(40),
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 30, left: 20, right: 20),
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  Container(
-                    width: 40,
-                    child: IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.menu,
-                          color: MyColors.blackText,
-                        )),
-                  ),
-                  Expanded(
-                      child: Column(
-                    children: [
-                      Text(
-                        "Current Location",
-                        style: TextStyle(
-                            color: MyColors.blackText,
-                            fontSize: MyFontSize.small2),
-                      ),
-                      const SizedBox(height: 3),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.circle_outlined,
-                            size: 10,
-                            color: MyColors.blackText,
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            "Khartoum",
-                            style: TextStyle(
-                                color: MyColors.blackText,
-                                fontSize: MyFontSize.medium1),
-                          ),
-                          const SizedBox(
-                            width: 5,
-                          ),
-                          Icon(
-                            Icons.arrow_drop_down,
-                            size: 24,
-                            color: MyColors.blackText,
-                          ),
-                        ],
-                      ),
-                    ],
-                  )),
-                  Container(
-                    width: 40,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(1000),
-                      child: Image.asset(
-                        "assets/images/homePage/avatar.jpg",
-                        height: 40,
-                        width: 40,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  )
-                ],
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              Text(
-                "Tracking Your Package",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    color: MyColors.blackText,
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 30),
-              Text(
-                "Please enter your tracking number",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: MyColors.blackText,
-                  fontSize: MyFontSize.medium1,
-                ),
-              ),
-              const SizedBox(height: 20),
-              CustomCard(
-                shadow: false,
-                height: 45,
-                width: double.infinity,
-                bgColor: MyColors.white,
-                borderRadius: BorderRadius.circular(10),
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Row(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Center(child: Text("عنوان الشحنة")),
+                const SizedBox(height: 16),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Icon(
-                      Icons.car_rental,
-                      color: MyColors.yellow,
+                    const Text(
+                      "SFO",
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.pink),
                     ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Expanded(
-                        child: Text(
-                      "Enter track number",
-                      style: MyStyle.textParagraphBlack,
+                    Center(
+                        child: Transform.rotate(
+                      angle: 1.5,
+                      child: Icon(
+                        Icons.local_airport,
+                        color: Colors.indigo.shade300,
+                        size: 24,
+                      ),
                     )),
-                    const SizedBox(
-                      width: 10,
+                    const Text(
+                      "SFO",
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.pink),
                     ),
-                    CustomCard(
-                        onTap: () {
-                          // Navigator.push(context, MaterialPageRoute(builder: (context) => TrackingShipment()));
-                        },
-                        shadow: false,
-                        bgColor: MyColors.yellow,
-                        borderRadius: BorderRadius.circular(10),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 7),
-                        child: Text(
-                          "Track",
-                          style: MyStyle.textParagraphBlack,
-                        ))
                   ],
                 ),
-              )
+                const SizedBox(height: 20),
+                const Text("data"),
+                const SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const [
+                    Text("Total orders"),
+                    Text(
+                      "9",
+                      style: TextStyle(color: Colors.amber),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const [
+                    Text("Total weight"),
+                    Text(
+                      "9",
+                      style: TextStyle(color: Colors.amber),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const [
+                    Text("رسوم الشحن"),
+                    Text(
+                      "\$ 350",
+                      style: TextStyle(color: Colors.amber),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const <Widget>[
+                    Text(
+                      "08:00 AM",
+                      style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "1 May 2022",
+                      style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Container(
+            color: Colors.white,
+            child: Row(
+              children: <Widget>[
+                SizedBox(
+                  height: 20,
+                  width: 10,
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.only(
+                            topRight: Radius.circular(10),
+                            bottomRight: const Radius.circular(10)),
+                        color: Colors.grey.shade200),
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: LayoutBuilder(
+                      builder: (context, constraints) {
+                        return Flex(
+                          children: List.generate(
+                              (constraints.constrainWidth() / 10).floor(),
+                              (index) => SizedBox(
+                                    height: 1,
+                                    width: 5,
+                                    child: DecoratedBox(
+                                      decoration: BoxDecoration(
+                                          color: Colors.grey.shade400),
+                                    ),
+                                  )),
+                          direction: Axis.horizontal,
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        );
+                      },
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                  width: 10,
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            bottomLeft: Radius.circular(10)),
+                        color: Colors.grey.shade200),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          // const SizedBox(height: 20),
+          Image.asset(
+            "assets/images/barcode.jpg",
+          ),
+        ],
+      ),
+    );
+  }
+
+  threePage() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 50),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 12),
+          TextFormField(
+            maxLines: 2,
+            textAlign: TextAlign.start,
+            decoration: InputDecoration(
+              labelText: "Note",
+              fillColor: Colors.white,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8.0),
+                borderSide: const BorderSide(),
+              ),
+            ),
+            validator: (val) {
+              if (val!.isEmpty) {
+                return "name cannot be empty";
+              } else {
+                return null;
+              }
+            },
+            keyboardType: TextInputType.text,
+            style: const TextStyle(
+              fontFamily: "Poppins",
+            ),
+          ),
+          const SizedBox(height: 12),
+          Row(
+            children: [
+              Checkbox(
+                value: valueChek,
+                onChanged: (newValue) => setState(
+                  () {
+                    valueChek = newValue!;
+                  },
+                ),
+              ),
+              const Expanded(
+                child: Text(
+                    "I acknowledge that all the details of this shipment are correct, and if any details are incorrect, unclear or missing, this will lead to the complete cancellation of the insurance applied to the shipment."),
+              ),
             ],
           ),
-        ),
-      ],
-    );
-  }
-}
-
-class WidgetStraggeredGridView extends StatefulWidget {
-  const WidgetStraggeredGridView({Key? key}) : super(key: key);
-
-  @override
-  _WidgetStraggeredGridViewState createState() =>
-      _WidgetStraggeredGridViewState();
-}
-
-class _WidgetStraggeredGridViewState extends State<WidgetStraggeredGridView> {
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(20),
-      child: StaggeredGrid.count(
-        crossAxisCount: 2,
-        mainAxisSpacing: 20,
-        crossAxisSpacing: 20,
-        children: [
-          CustomCard(
-            onTap: () {
-              // Navigator.push(context, MaterialPageRoute(builder: (context) => TrackingShipment()));
-            },
-            shadow: false,
-            width: double.infinity,
-            bgColor: MyColors.green,
-            borderRadius: BorderRadius.circular(15),
-            padding: const EdgeInsets.all(18),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CustomCard(
-                    shadow: false,
-                    height: 50,
-                    width: 50,
-                    bgColor: MyColors.yellow,
-                    borderRadius: BorderRadius.circular(100),
-                    child: const Center(
-                      child: const Icon(Icons.airplane_ticket),
-                    )),
-                const SizedBox(
-                  height: 15,
-                ),
-                Text(
-                  "Airline ticket booking",
-                  style: TextStyle(
-                      color: MyColors.white,
-                      fontSize: MyFontSize.medium1,
-                      fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  "Book the cheapest flight deals",
-                  style: TextStyle(
-                    color: MyColors.white.withOpacity(.8),
-                    fontSize: MyFontSize.small3,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          CustomCard(
-            onTap: () {
-              // Navigator.push(context, MaterialPageRoute(builder: (context) => TrackingShipment()));
-            },
-            shadow: false,
-            width: double.infinity,
-            bgColor: MyColors.green,
-            borderRadius: BorderRadius.circular(15),
-            padding: const EdgeInsets.all(18),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CustomCard(
-                    shadow: false,
-                    height: 50,
-                    width: 50,
-                    bgColor: MyColors.yellow,
-                    borderRadius: BorderRadius.circular(100),
-                    child: const Center(
-                      child: const Icon(Icons.calculate),
-                    )),
-                const SizedBox(
-                  height: 15,
-                ),
-                Text(
-                  "Ship your luggage all over the world",
-                  style: TextStyle(
-                      color: MyColors.white,
-                      fontSize: MyFontSize.medium1,
-                      fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  "We offer you the cheapest shipping offers in the world",
-                  style: TextStyle(
-                    color: MyColors.white.withOpacity(.8),
-                    fontSize: MyFontSize.small3,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          CustomCard(
-            onTap: () {
-              // Navigator.push(context, MaterialPageRoute(builder: (context) => TrackingShipment()));
-            },
-            shadow: false,
-            width: double.infinity,
-            bgColor: MyColors.green,
-            borderRadius: BorderRadius.circular(15),
-            padding: const EdgeInsets.all(18),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CustomCard(
-                    shadow: false,
-                    height: 50,
-                    width: 50,
-                    bgColor: MyColors.yellow,
-                    borderRadius: BorderRadius.circular(100),
-                    child: const Center(
-                      child: const Icon(Icons.calculate),
-                    )),
-                const SizedBox(
-                  height: 15,
-                ),
-                Text(
-                  "Calculate shipment amount",
-                  style: TextStyle(
-                      color: MyColors.white,
-                      fontSize: MyFontSize.medium1,
-                      fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  "All price options are base on price",
-                  style: TextStyle(
-                    color: MyColors.white.withOpacity(.8),
-                    fontSize: MyFontSize.small3,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          CustomCard(
-            onTap: () {
-              // Navigator.push(context, MaterialPageRoute(builder: (context) => TrackingShipment()));
-            },
-            shadow: false,
-            width: double.infinity,
-            bgColor: MyColors.softGrey,
-            borderRadius: BorderRadius.circular(15),
-            padding: const EdgeInsets.all(18),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CustomCard(
-                    shadow: false,
-                    height: 50,
-                    width: 50,
-                    bgColor: MyColors.yellow,
-                    borderRadius: BorderRadius.circular(100),
-                    child: const Center(child: const Icon(Icons.car_rental))),
-                const SizedBox(
-                  height: 15,
-                ),
-                Text(
-                  "Track Your Shipment Location",
-                  style: TextStyle(
-                      color: MyColors.blackText,
-                      fontSize: MyFontSize.medium1,
-                      fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  "Control your package like a boss, you will know every movement of the package and the estimation",
-                  style: TextStyle(
-                    color: MyColors.blackText.withOpacity(.8),
-                    fontSize: MyFontSize.small3,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          CustomCard(
-            onTap: () {
-              // Navigator.push(context, MaterialPageRoute(builder: (context) => TrackingShipment()));
-            },
-            shadow: false,
-            width: double.infinity,
-            bgColor: MyColors.softGrey,
-            borderRadius: BorderRadius.circular(15),
-            padding: const EdgeInsets.all(18),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CustomCard(
-                    shadow: false,
-                    height: 50,
-                    width: 50,
-                    bgColor: MyColors.yellow,
-                    borderRadius: BorderRadius.circular(100),
-                    child: const Center(child: const Icon(Icons.analytics))),
-                const SizedBox(
-                  height: 15,
-                ),
-                Text(
-                  "Your order history",
-                  style: TextStyle(
-                      color: MyColors.blackText,
-                      fontSize: MyFontSize.medium1,
-                      fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  "View all your order history. See how we sent it so fast. We believe that the sooner we ship to you, the better our service will be in your eyes.",
-                  style: TextStyle(
-                    color: MyColors.blackText.withOpacity(.8),
-                    fontSize: MyFontSize.small3,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          CustomCard(
-            onTap: () {
-              // Navigator.push(context, MaterialPageRoute(builder: (context) => TrackingShipment()));
-            },
-            shadow: false,
-            width: double.infinity,
-            bgColor: MyColors.softGrey,
-            borderRadius: BorderRadius.circular(15),
-            padding: const EdgeInsets.all(18),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CustomCard(
-                    shadow: false,
-                    height: 50,
-                    width: 50,
-                    bgColor: MyColors.yellow,
-                    borderRadius: BorderRadius.circular(100),
-                    child: const Center(child: const Icon(Icons.restore))),
-                const SizedBox(
-                  height: 15,
-                ),
-                Text(
-                  "Return the damaged item",
-                  style: TextStyle(
-                      color: MyColors.blackText,
-                      fontSize: MyFontSize.medium1,
-                      fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  "We accept returns of damaged goods due to our less than optimal delivery, or external intervention that causes your goods to be damaged. We know that customer satisfaction is our satisfaction",
-                  style: TextStyle(
-                    color: MyColors.blackText.withOpacity(.8),
-                    fontSize: MyFontSize.small3,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class WidgetTitle extends StatefulWidget {
-  const WidgetTitle({Key? key}) : super(key: key);
-
-  @override
-  _WidgetTitleState createState() => _WidgetTitleState();
-}
-
-class _WidgetTitleState extends State<WidgetTitle> {
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
-      child: Column(
-        children: [
-          Text("What are you looking for?",
-              textAlign: TextAlign.center, style: MyStyle.textTitleBlack),
           const SizedBox(
-            height: 10,
+            height: 20,
           ),
-          Text(
-            "Here are our best features",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.grey,
-              fontSize: MyFontSize.medium1,
+          Center(
+            child: TextButton(
+              child: const Text("Order Policy"),
+              onPressed: () {},
+            ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Center(
+            child: TextButton(
+              child: const Text("common questions"),
+              onPressed: () {},
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class MyColors {
-  static Color blackText = const Color(0xFF302B38);
-  static Color green = const Color(0xFF1B936E);
-  static Color yellow = const Color(0xFFF2BA30);
-  static Color softGrey = const Color(0xFFE9E9E9);
-  static Color white = const Color(0xFFFFFFFF);
-}
-
-class MyFontSize {
-  static double small1 = 8;
-  static double small2 = 10;
-  static double small3 = 12;
-  static double medium1 = 14;
-  static double medium2 = 16;
-  static double large1 = 18;
-  static double large2 = 20;
-  static double large3 = 22;
-}
-
-class MyStyle {
-  static TextStyle textTitleBlack = TextStyle(
-      color: MyColors.blackText,
-      fontSize: MyFontSize.large2,
-      fontWeight: FontWeight.bold);
-
-  static TextStyle textParagraphBlack = TextStyle(
-    color: MyColors.blackText,
-    fontSize: MyFontSize.medium2,
-  );
-}
-
-class CustomCard extends StatelessWidget {
-  final GestureTapCallback? onTap;
-  final EdgeInsetsGeometry padding;
-  final double? height;
-  final double? width;
-  final Color bgColor;
-  final BorderRadius? borderRadius;
-  final bool shadow;
-  final Color shadowColor;
-  final double shadowOpacity;
-  final double elevationX;
-  final double elevationY;
-  final double shadowBlur;
-  final Widget? child;
-
-  const CustomCard({
-    Key? key,
-    this.onTap,
-    this.padding = EdgeInsets.zero,
-    this.height,
-    this.width,
-    this.bgColor = Colors.transparent,
-    this.borderRadius,
-    required this.shadow,
-    this.shadowColor = Colors.grey,
-    this.shadowOpacity = 1,
-    this.elevationX = 0,
-    this.elevationY = 1,
-    this.shadowBlur = 6,
-    this.child,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: padding,
-      height: height,
-      width: width,
-      decoration: BoxDecoration(
-          color: bgColor,
-          borderRadius:
-              borderRadius == null ? BorderRadius.circular(25) : borderRadius,
-          boxShadow: [
-            if (shadow)
-              BoxShadow(
-                color: shadowColor.withOpacity(shadowOpacity),
-                offset: Offset(elevationX, elevationY),
-                blurRadius: shadowBlur,
-              ),
-          ]),
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius:
-              borderRadius == null ? BorderRadius.circular(25) : borderRadius!,
-        ),
-        margin: EdgeInsets.zero,
-        elevation: 0,
-        color: Colors.transparent,
-        child: Material(
-          color: Colors.transparent,
-          child: InkWell(
-            onTap: onTap,
-            child: child == null ? Container() : child,
-          ),
-        ),
       ),
     );
   }
