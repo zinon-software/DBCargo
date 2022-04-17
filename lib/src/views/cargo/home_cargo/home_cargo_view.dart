@@ -263,7 +263,7 @@ class _HomeCargoViewState extends State<HomeCargoView> {
               textWidget(text: "Shopping items", size: 20),
               for (var i = 0; i < 2; i++)
                 Card(
-                  color: Colors.amber,
+                  color: Colors.black87,
                   child: Container(
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
@@ -321,7 +321,7 @@ class _HomeCargoViewState extends State<HomeCargoView> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Center(child: Text("عنوان الشحنة")),
+                const Center(child: Text("Shipping Address")),
                 const SizedBox(height: 16),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -379,7 +379,7 @@ class _HomeCargoViewState extends State<HomeCargoView> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: const [
-                    Text("رسوم الشحن"),
+                    Text("Shipping fee"),
                     Text(
                       "\$ 350",
                       style: TextStyle(color: Colors.amber),

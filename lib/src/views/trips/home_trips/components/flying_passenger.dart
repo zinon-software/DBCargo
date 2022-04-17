@@ -3,15 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import '../../../utilities/themeStyles.dart';
-import '../../../widgets/dropDown.dart';
 import '../../../widgets/text_widget.dart';
 
 class Passenger extends StatelessWidget {
-  Passenger({Key? key}) : super(key: key);
+  const Passenger({Key? key}) : super(key: key);
 
-  final SearshController appState = Get.find();
+  // final SearshController appState = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -22,41 +19,41 @@ class Passenger extends StatelessWidget {
         children: [
           textWidget(text: "Passenger"),
           const SizedBox(height: 8),
-          Obx(
-            () => Row(
+          GetBuilder<SearshController>(
+            builder: (passengerController) => Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Icon(
                   Icons.people,
                   color:
-                      (appState.getAdult == 0) ? Colors.black26 : Colors.black,
+                      (passengerController.getAdult == 0) ? Colors.black26 : Colors.black,
                 ),
-                appState.getAdult == 0
+                passengerController.getAdult == 0
                     ? textWidget(text: " Adult", colors: Colors.black26)
                     : textWidget(
-                        text: "  ${appState.getAdult}", colors: Colors.black),
+                        text: "  ${passengerController.getAdult}", colors: Colors.black, fontWeight: FontWeight.bold),
                 const SizedBox(width: 15),
                 FaIcon(
                   FontAwesomeIcons.child,
                   size: 20,
                   color:
-                      (appState.getChild == 0) ? Colors.black26 : Colors.black,
+                      (passengerController.getChild == 0) ? Colors.black26 : Colors.black,
                 ),
-                appState.getChild == 0
+                passengerController.getChild == 0
                     ? textWidget(text: " Kids", colors: Colors.black26)
                     : textWidget(
-                        text: "  ${appState.getChild}", colors: Colors.black),
+                        text: "  ${passengerController.getChild}", colors: Colors.black, fontWeight: FontWeight.bold),
                 const SizedBox(width: 15),
                 FaIcon(
                   FontAwesomeIcons.baby,
                   size: 20,
                   color:
-                      (appState.getInfant == 0) ? Colors.black26 : Colors.black,
+                      (passengerController.getInfant == 0) ? Colors.black26 : Colors.black,
                 ),
-                appState.getInfant == 0
+                passengerController.getInfant == 0
                     ? textWidget(text: " Infant", colors: Colors.black26)
                     : textWidget(
-                        text: "  ${appState.getInfant}", colors: Colors.black),
+                        text: "  ${passengerController.getInfant}", colors: Colors.black, fontWeight: FontWeight.bold),
               ],
             ),
           ),
@@ -75,9 +72,9 @@ class Passenger extends StatelessWidget {
           style: GoogleFonts.overpass(fontSize: 14, color: Colors.black),
         ),
         const SizedBox(width: 5.0),
-        Obx(
-          () => Text(
-            appState.getTravellers.toString(),
+        GetBuilder<SearshController>(
+            builder: (passengerController) => Text(
+            passengerController.getTravellers.toString(),
             style: GoogleFonts.overpass(fontSize: 35),
           ),
         )
@@ -111,33 +108,33 @@ class Passenger extends StatelessWidget {
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: Obx(
-                  () => Column(
+                child: GetBuilder<SearshController>(
+            builder: (passengerController) => Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       buildQuantity(
-                        count: appState.getAdult,
+                        count: passengerController.getAdult,
                         title: 'Adult',
-                        add: () => appState.addAdult(),
-                        remove: () => appState.removeAdult(),
+                        add: () => passengerController.addAdult(),
+                        remove: () => passengerController.removeAdult(),
                       ),
                       const SizedBox(
                         height: 5,
                       ),
                       buildQuantity(
-                        count: appState.getChild,
+                        count: passengerController.getChild,
                         title: 'Child',
-                        add: () => appState.addChild(),
-                        remove: () => appState.removeChild(),
+                        add: () => passengerController.addChild(),
+                        remove: () => passengerController.removeChild(),
                       ),
                       const SizedBox(
                         height: 5,
                       ),
                       buildQuantity(
-                        count: appState.getInfant,
+                        count: passengerController.getInfant,
                         title: "Infant",
-                        add: () => appState.addInfant(),
-                        remove: () => appState.removeInfant(),
+                        add: () => passengerController.addInfant(),
+                        remove: () => passengerController.removeInfant(),
                       ),
                     ],
                   ),
@@ -191,7 +188,7 @@ class Passenger extends StatelessWidget {
                 ),
               Text(
                 count.toString(),
-                style: TextStyle(
+                style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 22,
                     color: Colors.black),

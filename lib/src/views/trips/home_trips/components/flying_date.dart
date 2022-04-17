@@ -31,8 +31,10 @@ class FlyingDate extends StatelessWidget {
                       const Icon(Icons.date_range),
                       Obx(
                         () => textWidget(
-                            text:
-                                "${appState.start!.value.year}/${appState.start!.value.month}/${appState.start!.value.day}"),
+                          text:
+                              "${appState.start!.value.year}/${appState.start!.value.month}/${appState.start!.value.day}",
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ],
                   ),
@@ -55,14 +57,15 @@ class FlyingDate extends StatelessWidget {
                             : Colors.black,
                       ),
                       textWidget(
-                          text: (appState.selectedCategory.value.categoryId ==
-                                  0)
-                              ? "Return"
-                              : "${appState.end!.value.year}/${appState.end!.value.month}/${appState.end!.value.day}",
-                          colors:
-                              (appState.selectedCategory.value.categoryId == 0)
-                                  ? Colors.black26
-                                  : Colors.black),
+                        text: (appState.selectedCategory.value.categoryId == 0)
+                            ? "Return"
+                            : "${appState.end!.value.year}/${appState.end!.value.month}/${appState.end!.value.day}",
+                        colors:
+                            (appState.selectedCategory.value.categoryId == 0)
+                                ? Colors.black26
+                                : Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ],
                   ),
                 ),
@@ -77,5 +80,4 @@ class FlyingDate extends StatelessWidget {
       ],
     );
   }
-
-  }
+}

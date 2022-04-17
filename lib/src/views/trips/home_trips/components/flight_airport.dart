@@ -14,93 +14,86 @@ class FlightAirport extends StatefulWidget {
 }
 
 class _FlightAirportState extends State<FlightAirport> {
-      final SearshController appState = Get.find();
-
+  final SearshController appState = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          GestureDetector(
-                            onTap: () => Get.to(
-                              () => GetValueTextFilde(
-                                airportType: "departureAirport",
-                                searshController: appState,
-                              ),
-                            ),
-                            child: Obx(
-                              () => Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  textWidget(
-                                      text: "From", colors: Colors.black26),
-                                  textWidget(
-                                      text: appState
-                                          .getDepartureAirport.value.city,
-                                      size: 20),
-                                  textWidget(
-                                      text:
-                                          "(${appState.getDepartureAirport.value.name})"),
-                                  line(
-                                    height: 1.0,
-                                    width: 70.0,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Container(
-                            width: 40,
-                            height: 40,
-                            alignment: Alignment.center,
-                            decoration: const BoxDecoration(
-                                color: Color(0xFF64B5F6),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(14))),
-                            child: Obx(
-                              () => FaIcon(
-                                (appState.selectedCategory.value.categoryId ==
-                                        0)
-                                    ? Icons.trending_flat
-                                    : Icons.swap_horiz,
-                                size: 20,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () => Get.to(
-                              () => GetValueTextFilde(
-                                airportType: "arrivalAirport",
-                                searshController: appState,
-                              ),
-                            ),
-                            child: Obx(
-                              () => Column(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  textWidget(
-                                      text: "To", colors: Colors.black26),
-                                  textWidget(
-                                      text:
-                                          appState.getArrivalAirport.value.city,
-                                      size: 20),
-                                  textWidget(
-                                      text:
-                                          "(${appState.getArrivalAirport.value.name})"),
-                                  line(
-                                    height: 1.0,
-                                    width: 70.0,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      );
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        GestureDetector(
+          onTap: () => Get.to(
+            () => GetValueTextFilde(
+              airportType: "departureAirport",
+              searshController: appState,
+            ),
+          ),
+          child: GetBuilder<SearshController>(
+              builder: (searshController) => Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      textWidget(text: "From", colors: Colors.black26),
+                      textWidget(
+                          text: searshController.getDepartureAirport.value.city,
+                          size: 20),
+                      textWidget(
+                          text:
+                              "(${searshController.getDepartureAirport.value.name})"),
+                      line(
+                        height: 1.0,
+                        width: 70.0,
+                      ),
+                    ],
+                  )),
+        ),
+        Container(
+          width: 40,
+          height: 40,
+          alignment: Alignment.center,
+          decoration: const BoxDecoration(
+              color: Color(0xFF64B5F6),
+              borderRadius: BorderRadius.all(Radius.circular(14))),
+          child: Obx(
+            () => FaIcon(
+              (appState.selectedCategory.value.categoryId == 0)
+                  ? Icons.trending_flat
+                  : Icons.swap_horiz,
+              size: 20,
+              color: Colors.white,
+            ),
+          ),
+        ),
+        Flexible(
+          child: GestureDetector(
+            onTap: () => Get.to(
+              () => GetValueTextFilde(
+                airportType: "arrivalAirport",
+                searshController: appState,
+              ),
+            ),
+            child: GetBuilder<SearshController>(
+              builder: (searshController) => Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  textWidget(text: "To", colors: Colors.black26),
+                  textWidget(
+                      text: searshController.getArrivalAirport.value.city,
+                      size: 20),
+                  textWidget(
+                      text: "(${searshController.getArrivalAirport.value.name})"),
+                  line(
+                    height: 1.0,
+                    width: 70.0,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }
 

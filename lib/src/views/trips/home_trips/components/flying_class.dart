@@ -5,7 +5,7 @@ import '../../../../controllers/trip_controller.dart';
 import '../../../widgets/text_widget.dart';
 
 class ClassCabina extends StatelessWidget {
-  ClassCabina({Key? key}) : super(key: key);
+  const ClassCabina({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,11 +38,14 @@ class ClassCabina extends StatelessWidget {
                             : Colors.black26,
                       ),
                       textWidget(
-                          text: item.name,
-                          colors:
-                              item.ID == appState.selectedCabinaClass.value.ID
-                                  ? Colors.black
-                                  : Colors.black26),
+                        text: item.name,
+                        colors: item.ID == appState.selectedCabinaClass.value.ID
+                            ? Colors.black
+                            : Colors.black26,
+                        fontWeight: item.ID == appState.selectedCabinaClass.value.ID
+                            ? FontWeight.bold
+                            :FontWeight.normal,
+                      ),
                       const SizedBox(width: 15),
                     ],
                   ),

@@ -108,9 +108,9 @@ class HomeTripsView extends StatelessWidget {
                         const FlightAirport(),
                         FlyingDate(),
                         Passenger(),
-                        ClassCabina(),
+                        const ClassCabina(),
                         const Nonstop(
-                          titel: "Save to Wishlist",
+                          titel: "Nonstop flights first",
                         ),
                         FlyingButtonSearch(
                           titel: "Search Flights",

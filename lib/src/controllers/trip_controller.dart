@@ -25,31 +25,37 @@ class SearshController extends GetxController {
   void addAdult() {
     _adult.value += 1;
     _travellers.value += 1;
+    update();
   }
 
   void addChild() {
     _child.value += 1;
     _travellers.value += 1;
+    update();
   }
 
   void addInfant() {
     _infant.value += 1;
     _travellers.value += 1;
+    update();
   }
 
   void removeAdult() {
     _adult.value -= 1;
     _travellers.value -= 1;
+    update();
   }
 
   void removeChild() {
     _child.value -= 1;
     _travellers.value -= 1;
+    update();
   }
 
   void removeInfant() {
     _infant.value -= 1;
     _travellers.value -= 1;
+    update();
   }
 
   // Airport
@@ -64,10 +70,12 @@ class SearshController extends GetxController {
 
   void setArrivalAirport(query) {
     _arrivalAirport = query;
+    update();
   }
 
   void setDepartureAirport(query) {
     _departureAirport = query;
+    update();
   }
 
   // Catgory

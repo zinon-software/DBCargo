@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
-textWidget({String? text, Color? colors, double? size}) => Text(
+textWidget({String? text, Color? colors, double? size, FontWeight? fontWeight}) => Text(
         text!,
-        style: TextStyle(color: colors, fontSize: size),
+      maxLines: 1,
+
+        style: TextStyle(color: colors, fontSize: size, fontWeight: fontWeight),
+         overflow: TextOverflow.ellipsis,
       );
 
   line({height, width}) => Container(

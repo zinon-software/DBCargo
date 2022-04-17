@@ -13,7 +13,7 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    // Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -23,35 +23,74 @@ class HomeView extends StatelessWidget {
             children: [
               WidgetBanner(),
               WidgetTitle(),
-              WidgetStraggeredGridView(),
+              WidgetStraggeredGridView(
+                crossAxisCount: 2,
+              ),
             ],
           ),
-          tab: tabAndDesktopBannerWidget(size),
-          desktop: tabAndDesktopBannerWidget(size),
+          tab: tabAndDesktopBannerWidget(3, context),
+          desktop: tabAndDesktopBannerWidget(6, context),
         ),
       ),
     );
   }
 
-  Row tabAndDesktopBannerWidget(Size size) {
-    return Row(
+  Column tabAndDesktopBannerWidget(int size, BuildContext context) {
+    return Column(
       // crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Expanded(
-          child: Container(
-            height: size.height,
+        Container(
+          color: Color(0xFF64B5F6),
+          child: WidgetBanner(),
+        ),
+        Row(
+          children: [
+            WidgetTitle(),
+            Expanded(
+                child: WidgetStraggeredGridView(
+              crossAxisCount: size,
+            )),
+          ],
+        ),
+        if (isDesktop(context))
+          Container(
+            height: 150,
+            width: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.all(10),
             color: Color(0xFF64B5F6),
-            child: WidgetBanner(),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text(
+                  "DBCargo.com",
+                  style: TextStyle(fontSize: 20),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.whatsapp),
+                    Icon(Icons.facebook),
+                    Icon(Icons.snapchat),
+                    Icon(Icons.telegram),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Icon(Icons.snapchat),
+                    // Icon(Icons.snapchat),
+                    Row(
+                      children: [
+                        Icon(Icons.paypal),
+                        Icon(Icons.payment),
+                        Icon(Icons.paypal),
+                      ],
+                    ),
+                  ],
+                )
+              ],
+            ),
           ),
-        ),
-        Expanded(
-          child: Column(
-            children: [
-              WidgetTitle(),
-              WidgetStraggeredGridView(),
-            ],
-          ),
-        ),
       ],
     );
   }
@@ -76,7 +115,6 @@ class _WidgetBannerState extends State<WidgetBanner> {
           alignment: Alignment.bottomCenter,
           decoration: const BoxDecoration(
             color: Color(0xFF64B5F6),
-            
             borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(25),
               bottomRight: Radius.circular(25),
@@ -100,44 +138,45 @@ class _WidgetBannerState extends State<WidgetBanner> {
                         )),
                   ),
                   Expanded(
-                      child: Column(
-                    children: [
-                      Text(
-                        "Current Location",
-                        style: TextStyle(
-                            color: MyColors.blackText,
-                            fontSize: MyFontSize.small2),
-                      ),
-                      const SizedBox(height: 3),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.circle_outlined,
-                            size: 10,
-                            color: MyColors.blackText,
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            "Khartoum",
-                            style: TextStyle(
-                                color: MyColors.blackText,
-                                fontSize: MyFontSize.medium1),
-                          ),
-                          const SizedBox(
-                            width: 5,
-                          ),
-                          Icon(
-                            Icons.arrow_drop_down,
-                            size: 24,
-                            color: MyColors.blackText,
-                          ),
-                        ],
-                      ),
-                    ],
-                  )),
+                    child: Column(
+                      children: [
+                        Text(
+                          "Current Location",
+                          style: TextStyle(
+                              color: MyColors.blackText,
+                              fontSize: MyFontSize.small2),
+                        ),
+                        const SizedBox(height: 3),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.circle_outlined,
+                              size: 10,
+                              color: MyColors.blackText,
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              "Khartoum",
+                              style: TextStyle(
+                                  color: MyColors.blackText,
+                                  fontSize: MyFontSize.medium1),
+                            ),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            Icon(
+                              Icons.arrow_drop_down,
+                              size: 24,
+                              color: MyColors.blackText,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                   Container(
                     width: 40,
                     child: ClipRRect(
@@ -149,7 +188,7 @@ class _WidgetBannerState extends State<WidgetBanner> {
                         fit: BoxFit.cover,
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
               const SizedBox(
@@ -190,29 +229,31 @@ class _WidgetBannerState extends State<WidgetBanner> {
                       width: 10,
                     ),
                     Expanded(
-                        child: Text(
-                      "Enter track number",
-                      style: MyStyle.textParagraphBlack,
-                    )),
+                      child: Text(
+                        "Enter track number",
+                        style: MyStyle.textParagraphBlack,
+                      ),
+                    ),
                     const SizedBox(
                       width: 10,
                     ),
                     CustomCard(
-                        onTap: () {
-                          // Navigator.push(context, MaterialPageRoute(builder: (context) => TrackingShipment()));
-                        },
-                        shadow: false,
-                        bgColor: MyColors.yellow,
-                        borderRadius: BorderRadius.circular(10),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 7),
-                        child: Text(
-                          "Track",
-                          style: MyStyle.textParagraphBlack,
-                        ))
+                      onTap: () {
+                        // Navigator.push(context, MaterialPageRoute(builder: (context) => TrackingShipment()));
+                      },
+                      shadow: false,
+                      bgColor: MyColors.yellow,
+                      borderRadius: BorderRadius.circular(10),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 7),
+                      child: Text(
+                        "Track",
+                        style: MyStyle.textParagraphBlack,
+                      ),
+                    ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -222,7 +263,9 @@ class _WidgetBannerState extends State<WidgetBanner> {
 }
 
 class WidgetStraggeredGridView extends StatefulWidget {
-  const WidgetStraggeredGridView({Key? key}) : super(key: key);
+  const WidgetStraggeredGridView({Key? key, required this.crossAxisCount})
+      : super(key: key);
+  final int crossAxisCount;
 
   @override
   _WidgetStraggeredGridViewState createState() =>
@@ -236,7 +279,7 @@ class _WidgetStraggeredGridViewState extends State<WidgetStraggeredGridView> {
       padding: const EdgeInsets.all(20),
       child: StaggeredGrid.count(
         // crossAxisCount: isMobile(context) ? 2 : 4,
-        crossAxisCount: 2,
+        crossAxisCount: widget.crossAxisCount,
         mainAxisSpacing: 20,
         crossAxisSpacing: 20,
         children: [
