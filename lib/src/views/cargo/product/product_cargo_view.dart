@@ -246,7 +246,11 @@ class ProductView extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 12),
+                  Container(
+                    // height: 12,
+                    margin: const EdgeInsets.only(left: 30),
+                    child: const Text("single item price"),
+                  ),
                   Row(
                     children: [
                       Expanded(
@@ -267,7 +271,10 @@ class ProductView extends StatelessWidget {
                       const Text("Total (5)"),
                     ],
                   ),
-                  const SizedBox(height: 12),
+                   Container(
+                    margin: const EdgeInsets.only(left: 30, top: 10),
+                    child: const Text("single item weight"),
+                  ),
                   Row(
                     // mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -293,7 +300,7 @@ class ProductView extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
-                      Text('Categories:', style: ThemeStyles.dropDownTextStyle),
+                      Text('Category: ', style: ThemeStyles.dropDownTextStyle),
                       const SizedBox(width: 10.0),
                       Expanded(child: DropDown('food'))
                     ],
@@ -318,7 +325,7 @@ class ProductView extends StatelessWidget {
                   const Nonstop(titel: "Save to Wishlist"),
                   const SizedBox(height: 12),
                   FlyingButtonSearch(
-                    titel: "Okay",
+                    titel: "DONE",
                     onTap: () => Get.back(),
                   ),
                 ],

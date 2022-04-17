@@ -18,9 +18,19 @@ class _TicketDetailViewState extends State<TicketDetailView> {
             child: Column(
               children: [
                 BoxDestination(),
+                const SizedBox(
+                  height: 8,
+                ),
                 Container(
-                  margin: const EdgeInsets.only(left: 10),
+                  padding: const EdgeInsets.only(left: 10),
                   alignment: Alignment.center,
+                  decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft:Radius.circular(20),
+                    topRight:Radius.circular(20),
+                  )
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
@@ -32,7 +42,10 @@ class _TicketDetailViewState extends State<TicketDetailView> {
                     ],
                   ),
                 ),
-                Recommendation()
+                Container(
+                  color: Colors.white,
+                  padding: const EdgeInsets.only(bottom: 20),
+                  child: Recommendation())
               ],
             ),
           ),
@@ -78,7 +91,7 @@ Widget _originAndDestionationIcon() {
     children: const <Widget>[
       Text("SFO", style: TextStyle(fontSize: 20)),
       SizedBox(height: 15),
-      Icon(Icons.swap_vert, color: Color(0xFFF00d5d8), size: 40),
+      Icon(Icons.swap_vert, color: Color(0xfff00d5d8), size: 40),
       SizedBox(height: 15),
       Text("JFK", style: TextStyle(fontSize: 20)),
     ],
@@ -94,7 +107,7 @@ Widget _originAndDestionation() {
         text: const TextSpan(children: <TextSpan>[
           TextSpan(
               text: "Origin \n",
-              style: TextStyle(color: Color(0xFFFb7b7c5), fontSize: 14)),
+              style: TextStyle(color: Color(0xfffb7b7c5), fontSize: 14)),
           TextSpan(
             text: "San Francisco",
             style: TextStyle(fontSize: 17, color: Colors.black),
@@ -106,7 +119,7 @@ Widget _originAndDestionation() {
         text: const TextSpan(children: <TextSpan>[
           TextSpan(
               text: "Destination \n",
-              style: TextStyle(color: Color(0xFFFb7b7c5), fontSize: 14)),
+              style: TextStyle(color: Color(0xfffb7b7c5), fontSize: 14)),
           TextSpan(
             text: "JFK, New York",
             style: TextStyle(fontSize: 17, color: Colors.black),
@@ -121,14 +134,14 @@ Widget _iconDestination() {
   return Container(
     child: Column(
       children: const <Widget>[
-        Icon(Icons.airplanemode_active, color: Color(0xFFF00d5d8), size: 30),
-        Icon(Icons.fiber_manual_record, color: Color(0xFFF00d5d8), size: 12),
-        Icon(Icons.fiber_manual_record, color: Color(0xFFF00d5d8), size: 12),
-        Icon(Icons.fiber_manual_record, color: Color(0xFFF00d5d8), size: 12),
-        Icon(Icons.fiber_manual_record, color: Color(0xFFFf89380), size: 12),
-        Icon(Icons.fiber_manual_record, color: Color(0xFFFf89380), size: 12),
-        Icon(Icons.fiber_manual_record, color: Color(0xFFFf89380), size: 12),
-        Icon(Icons.location_on, color: Color(0xFFFf89380), size: 30),
+        Icon(Icons.airplanemode_active, color: Color(0xfff00d5d8), size: 30),
+        Icon(Icons.fiber_manual_record, color: Color(0xfff00d5d8), size: 12),
+        Icon(Icons.fiber_manual_record, color: Color(0xfff00d5d8), size: 12),
+        Icon(Icons.fiber_manual_record, color: Color(0xfff00d5d8), size: 12),
+        Icon(Icons.fiber_manual_record, color: Color(0xffff89380), size: 12),
+        Icon(Icons.fiber_manual_record, color: Color(0xffff89380), size: 12),
+        Icon(Icons.fiber_manual_record, color: Color(0xffff89380), size: 12),
+        Icon(Icons.location_on, color: Color(0xffff89380), size: 30),
       ],
     ),
   );
@@ -152,7 +165,7 @@ class SelectWay extends StatelessWidget {
                 child: BtnWay(
                   label: "ROUND TRIP",
                   iconData: Icons.swap_horiz,
-                  color: Color(0xFFF00d5d8),
+                  color: Color(0xfff00d5d8),
                 ),
               ),
               Expanded(
@@ -190,7 +203,7 @@ class BtnWay extends StatelessWidget {
         width: 160,
         decoration: BoxDecoration(
             color: color?.withOpacity(0.3),
-            borderRadius: const BorderRadius.all(const Radius.circular(25))),
+            borderRadius: const BorderRadius.all(Radius.circular(25))),
         child: Row(
           children: <Widget>[
             const SizedBox(width: 10),
@@ -200,7 +213,7 @@ class BtnWay extends StatelessWidget {
               decoration: BoxDecoration(
                   color: color,
                   borderRadius:
-                      const BorderRadius.all(const Radius.circular(14))),
+                      const BorderRadius.all(Radius.circular(14))),
               child: Icon(iconData, color: Colors.white, size: 18),
             ),
             const SizedBox(width: 5),
@@ -229,7 +242,7 @@ class SelectOptions extends StatelessWidget {
               child: BtnPassengers(
                 title: "Departure",
                 label: "22 Oct, 2022",
-                color: Color(0xFFFfeb578),
+                color: Color(0xffffeb578),
                 iconData: Icons.today,
               ),
             ),
@@ -237,7 +250,7 @@ class SelectOptions extends StatelessWidget {
               child: BtnPassengers(
                 title: "Return",
                 label: "23 Nov, 2022",
-                color: Color(0xFFF00d5d8),
+                color: Color(0xfff00d5d8),
                 iconData: Icons.today,
               ),
             )
@@ -249,13 +262,13 @@ class SelectOptions extends StatelessWidget {
             BtnPassengers(
               title: "Passengers",
               label: "2 Adult",
-              color: Color(0xFFFfe8db9),
+              color: Color(0xffffe8db9),
               iconData: Icons.wc,
             ),
             BtnPassengers(
               title: "Class",
               label: "Economy",
-              color: Color(0xFFF7d59ee),
+              color: Color(0xfff7d59ee),
               iconData: Icons.today,
             )
           ],
@@ -292,7 +305,7 @@ class BtnPassengers extends StatelessWidget {
             width: 160,
             decoration: const BoxDecoration(
                 color: Colors.white,
-                borderRadius: const BorderRadius.all(const Radius.circular(5))),
+                borderRadius: BorderRadius.all(Radius.circular(5))),
             child: Row(
               children: <Widget>[
                 const SizedBox(width: 10),
@@ -302,7 +315,7 @@ class BtnPassengers extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: color,
                       borderRadius:
-                          const BorderRadius.all(const Radius.circular(14))),
+                          const BorderRadius.all(Radius.circular(14))),
                   child: Icon(iconData, color: Colors.white, size: 18),
                 ),
                 const SizedBox(width: 5),
@@ -333,13 +346,13 @@ class Recommendation extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.only(left: 8.0),
-          child: const Text("Recommended for you",
+        const Padding(
+          padding: EdgeInsets.only(left: 8.0),
+          child: Text("Recommended for you",
               style: TextStyle(color: Colors.black, fontSize: 20)),
         ),
         const SizedBox(height: 5),
-        Container(
+        SizedBox(
           height: 200,
           child: ListView(
             scrollDirection: Axis.horizontal,
@@ -349,50 +362,50 @@ class Recommendation extends StatelessWidget {
                 title: "nome",
                 price: "\$ 30",
                 kg: "1",
-                color: const Color(0xFFFfe8db9),
+                color: const Color(0xffffe8db9),
                 onTap: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => const Reservations(
-                              color: const Color(0xFFFfe8db9))));
+                              color: Color(0xffffe8db9))));
                 },
               ),
               RecommendationItem(
                   title: "nome",
                   price: "\$ 60",
                   kg: "2",
-                  color: const Color(0xFFF00ccff),
+                  color: const Color(0xfff00ccff),
                   onTap: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                const Reservations(color: Color(0xFFF00ccff))));
+                                const Reservations(color: Color(0xfff00ccff))));
                   }),
               RecommendationItem(
                   title: "nome",
                   price: "\$ 90",
                   kg: "3",
-                  color: const Color(0xFFFffdb83),
+                  color: const Color(0xfffffdb83),
                   onTap: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                const Reservations(color: Color(0xFFFffdb83))));
+                                const Reservations(color: Color(0xfffffdb83))));
                   }),
               RecommendationItem(
                   title: "nome",
                   price: "\$ 120",
                   kg: "4",
-                  color: const Color(0xFFFaebddd0),
+                  color: const Color(0xfffaebddd0),
                   onTap: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => const Reservations(
-                                color: Color(0xFFFaebddd0))));
+                                color: Color(0xfffaebddd0))));
                   })
             ],
           ),
@@ -564,7 +577,7 @@ class _ReservationsState extends State<Reservations> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
                   decoration: const BoxDecoration(
-                      color: Color(0xFFFf6f5fb),
+                      color: Color(0xffff6f5fb),
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(30),
                           topRight: Radius.circular(30))),
@@ -581,7 +594,7 @@ class _ReservationsState extends State<Reservations> {
                         ],
                       ),
                       const SizedBox(height: 30),
-                      Container(
+                      SizedBox(
                         height: 590,
                         child: ListView(
                           children: <Widget>[

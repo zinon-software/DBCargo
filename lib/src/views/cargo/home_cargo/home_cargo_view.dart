@@ -1,14 +1,11 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dpcargo/src/views/onboarding/onboarding_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import '../../../controllers/onboarding_controller.dart';
 import '../../../controllers/trip_controller.dart';
 import '../../trips/home_trips/components/flight_airport.dart';
 import '../../trips/home_trips/components/flying_button_search.dart';
-import '../../trips/tickets/flight_tickets_view.dart';
 import '../../widgets/pickDate_widget.dart';
 import '../../widgets/text_widget.dart';
 import '../favorite/favorite_cargo_view.dart';
@@ -56,7 +53,7 @@ class _HomeCargoViewState extends State<HomeCargoView> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 Container(
-                  height: MediaQuery.of(context).size.height - 500,
+                  height: MediaQuery.of(context).size.height - 550,
                   width: MediaQuery.of(context).size.width,
                   alignment: Alignment.bottomCenter,
                   margin: const EdgeInsets.symmetric(horizontal: 30),
@@ -107,124 +104,127 @@ class _HomeCargoViewState extends State<HomeCargoView> {
                     ),
                   ),
                 ),
-                Container(
-                  color: Colors.grey[200],
-                  height: 500,
-                  width: MediaQuery.of(context).size.width,
-
-                  child: Obx(
-                    () => Center(
-                      child: Stack(
-                        children: [
-                          CarouselSlider(
-                            items: [1, 2, 3]
-                                .map((item) => onboardingItem(item))
-                                .toList(),
-                            options: CarouselOptions(
-                              initialPage:
-                                  onBoardingControlller.getCurrentIndex,
-                              height: double.infinity,
-                              enableInfiniteScroll: false,
-                              viewportFraction: 1,
-                              onPageChanged: (index, reason) {
-                                onBoardingControlller.setCurrentIndex(index);
-                              },
-                            ),
-                            carouselController: carouselController,
-                          ),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 5),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  onBoardingControlller.getCurrentIndex == 0
-                                      ? const SizedBox()
-                                      : MaterialButton(
-                                          onPressed: () {
-                                            (onBoardingControlller
-                                                        .getCurrentIndex !=
-                                                    0)
-                                                ? carouselController
-                                                    .previousPage(
-                                                        duration:
-                                                            const Duration(
-                                                                milliseconds:
-                                                                    300),
-                                                        curve: Curves.linear)
-                                                : null;
-                                          },
-                                          child: Row(
-                                            children: const [
-                                              Padding(
-                                                padding: EdgeInsets.only(
-                                                    bottom: 8.0),
-                                                child: Text(
-                                                  "←",
-                                                  style:
-                                                      TextStyle(fontSize: 20),
-                                                ),
-                                              ),
-                                              Text("Bake"),
-                                            ],
-                                          ),
-                                        ),
-                                  onBoardingControlller.getCurrentIndex == 2
-                                      ? MaterialButton(
-                                          onPressed: () {},
-                                          child: const Text("Finish"))
-                                      : MaterialButton(
-                                          onPressed: () {
-                                            (onBoardingControlller
-                                                        .getCurrentIndex !=
-                                                    2)
-                                                ? carouselController.nextPage(
-                                                    duration: const Duration(
-                                                        milliseconds: 300),
-                                                    curve: Curves.linear)
-                                                : null;
-                                          },
-                                          child: Row(
-                                            children: const [
-                                              Text("Next"),
-                                              Padding(
-                                                padding: EdgeInsets.only(
-                                                    bottom: 8.0),
-                                                child: Text(
-                                                  "→",
-                                                  style:
-                                                      TextStyle(fontSize: 20),
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-
-                  // ,
-                )
               ],
             ),
           ),
         ],
+      ),
+      bottomNavigationBar: Container(
+        height: 550,
+        width: MediaQuery.of(context).size.width,
+        decoration:  BoxDecoration(
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          ),
+          color: Colors.grey.shade200,
+        ),
+        child: Obx(
+          () => Center(
+            child: Stack(
+              children: [
+                CarouselSlider(
+                  items: [1, 2, 3].map((item) => onboardingItem(item)).toList(),
+                  options: CarouselOptions(
+                    initialPage: onBoardingControlller.getCurrentIndex,
+                    height: double.infinity,
+                    enableInfiniteScroll: false,
+                    viewportFraction: 1,
+                    onPageChanged: (index, reason) {
+                      onBoardingControlller.setCurrentIndex(index);
+                    },
+                  ),
+                  carouselController: carouselController,
+                ),
+                Align(
+                  alignment: Alignment.bottomRight,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 5),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        onBoardingControlller.getCurrentIndex == 0
+                            ? const SizedBox()
+                            : MaterialButton(
+                                onPressed: () {
+                                  (onBoardingControlller.getCurrentIndex != 0)
+                                      ? carouselController.previousPage(
+                                          duration:
+                                              const Duration(milliseconds: 300),
+                                          curve: Curves.linear)
+                                      : null;
+                                },
+                                child: Row(
+                                  children: const [
+                                    Padding(
+                                      padding: EdgeInsets.only(bottom: 8.0),
+                                      child: Text(
+                                        "←",
+                                        style: TextStyle(
+                                            fontSize: 20, color: Colors.orange),
+                                      ),
+                                    ),
+                                    Text(
+                                      "Bake",
+                                      style: TextStyle(color: Colors.orange),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                        onBoardingControlller.getCurrentIndex == 2
+                            ? MaterialButton(
+                                onPressed: () {},
+                                child: const Text(
+                                  "Finish",
+                                  style: TextStyle(color: Colors.orange),
+                                ),
+                              )
+                            : MaterialButton(
+                                onPressed: () {
+                                  (onBoardingControlller.getCurrentIndex != 2)
+                                      ? carouselController.nextPage(
+                                          duration:
+                                              const Duration(milliseconds: 300),
+                                          curve: Curves.linear)
+                                      : null;
+                                },
+                                child: Row(
+                                  children: const [
+                                    Text(
+                                      "Next",
+                                      style: TextStyle(color: Colors.orange),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(bottom: 8.0),
+                                      child: Text(
+                                        "→",
+                                        style: TextStyle(
+                                            color: Colors.orange, fontSize: 20),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+
+        // ,
       ),
     );
   }
 
   onePage(BuildContext context, SearshController appState) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      padding: const EdgeInsets.only(right: 20, left: 20, bottom: 35),
+      // padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       child: Container(
-        color: Colors.white,
+        color: Colors.transparent,
         padding: const EdgeInsets.all(10),
         child: SingleChildScrollView(
           child: Column(
@@ -261,9 +261,9 @@ class _HomeCargoViewState extends State<HomeCargoView> {
               ),
               const SizedBox(height: 10),
               textWidget(text: "Shopping items", size: 20),
-              for (var i = 0; i < 2; i++)
+              for (var i = 0; i < 5; i++)
                 Card(
-                  color: Colors.black87,
+                  color: Colors.white,
                   child: Container(
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
@@ -271,9 +271,15 @@ class _HomeCargoViewState extends State<HomeCargoView> {
                       border: Border.all(color: const Color(0xFF64B5F6)),
                     ),
                     height: 80,
-                    child: const Icon(
-                      Icons.camera_alt,
-                      color: Color(0xFF64B5F6),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(
+                          Icons.camera_alt,
+                          color: Color(0xFF64B5F6),
+                        ),
+                        Text("test item $i")
+                      ],
                     ),
                   ),
                 ),
@@ -281,7 +287,7 @@ class _HomeCargoViewState extends State<HomeCargoView> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12.0),
                 child: FlyingButtonSearch(
-                  titel: "Add a new shipment",
+                  titel: "ADD NEW ITEM",
                   onTap: () {
                     Get.to(() => const ProductView());
                   },
@@ -291,7 +297,7 @@ class _HomeCargoViewState extends State<HomeCargoView> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12.0),
                 child: FlyingButtonSearch(
-                  titel: "Choose from Wish List",
+                  titel: "PICK FROM WISHLIST",
                   onTap: () {
                     Get.to(() => const FavoriteView());
                   },
@@ -420,7 +426,7 @@ class _HomeCargoViewState extends State<HomeCargoView> {
                     decoration: BoxDecoration(
                         borderRadius: const BorderRadius.only(
                             topRight: Radius.circular(10),
-                            bottomRight: const Radius.circular(10)),
+                            bottomRight: Radius.circular(10)),
                         color: Colors.grey.shade200),
                   ),
                 ),

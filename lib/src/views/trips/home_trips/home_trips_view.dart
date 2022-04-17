@@ -3,11 +3,9 @@ import 'package:dpcargo/src/views/widgets/switch_widget.dart';
 import 'package:dpcargo/src/views/utilities/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../controllers/trip_controller.dart';
-import '../../../models/category.dart';
-import '../../widgets/text_widget.dart';
 import '../tickets/flight_tickets_view.dart';
 import 'components/flight_airport.dart';
+import 'components/flight_path.dart';
 import 'components/flying_button_search.dart';
 import 'components/flying_date.dart';
 import 'components/flying_passenger.dart';
@@ -20,7 +18,7 @@ class HomeTripsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final SearshController appState = Get.find();
+    // final SearshController appState = Get.find();
     return Scaffold(
       backgroundColor: ThemeColors.backgroundColor,
       body: Stack(
@@ -34,49 +32,8 @@ class HomeTripsView extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                Center(
-                  child: Container(
-                    height: MediaQuery.of(context).size.height - 500,
-                    width: isMobile(context)
-                        ? MediaQuery.of(context).size.width
-                        : 350,
-                    alignment: Alignment.bottomCenter,
-                    margin: const EdgeInsets.symmetric(horizontal: 30),
-                    child: Obx(
-                      () => Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          for (Category category in appState.categories)
-                            GestureDetector(
-                              child: textWidget(
-                                  text: appState.selectedCategory.value
-                                              .categoryId ==
-                                          category.categoryId
-                                      ? category.name!.toUpperCase()
-                                      : category.name,
-                                  colors: (appState.selectedCategory.value
-                                              .categoryId ==
-                                          category.categoryId)
-                                      ? Colors.white
-                                      : Colors.white60,
-                                  size: (appState.selectedCategory.value
-                                              .categoryId ==
-                                          category.categoryId)
-                                      ? 20
-                                      : null),
-                              onTap: () {
-                                final isSelected = appState
-                                        .selectedCategory.value.categoryId ==
-                                    category.categoryId;
-                                if (!isSelected) {
-                                  appState.updateCategory(category);
-                                }
-                              },
-                            )
-                        ],
-                      ),
-                    ),
-                  ),
+                const Center(
+                  child: FlightPath(), 
                 ),
                 Container(
                   height: isMobile(context)
@@ -88,14 +45,14 @@ class HomeTripsView extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(25.0),
-                      topRight: Radius.circular(25.0),
+                      topLeft: const Radius.circular(25.0),
+                      topRight: const Radius.circular(25.0),
                       bottomLeft: isMobile(context)
-                          ? Radius.circular(0.0)
-                          : Radius.circular(25.0),
+                          ? const Radius.circular(0.0)
+                          : const Radius.circular(25.0),
                       bottomRight: isMobile(context)
-                          ? Radius.circular(0.0)
-                          : Radius.circular(25.0),
+                          ? const Radius.circular(0.0)
+                          : const Radius.circular(25.0),
                     ),
                   ),
                   child: Padding(
@@ -107,17 +64,10 @@ class HomeTripsView extends StatelessWidget {
                       children: [
                         const FlightAirport(),
                         FlyingDate(),
-                        Passenger(),
+                        const Passenger(),
                         const ClassCabina(),
-                        const Nonstop(
-                          titel: "Nonstop flights first",
-                        ),
-                        FlyingButtonSearch(
-                          titel: "Search Flights",
-                          onTap: () {
-                            Get.to(() => const FlightTickets());
-                          },
-                        ),
+                        const Nonstop(titel: "Nonstop flights first"),
+                        const SizedBox(height: 15)
                       ],
                     ),
                   ),
@@ -126,6 +76,18 @@ class HomeTripsView extends StatelessWidget {
             ),
           ),
         ],
+      ),
+      bottomNavigationBar: Container(
+        color: Colors.white,
+        padding: const EdgeInsets.only(left: 30.0, right: 30.0, bottom: 15),
+        child: FlyingButtonSearch(
+          titel: "Search Flights",
+          onTap: () {
+            Get.to(
+              () => const FlightTickets(),
+            );
+          },
+        ),
       ),
     );
   }

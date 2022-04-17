@@ -86,6 +86,7 @@ class SearshController extends GetxController {
 
   void updateCategory(Category selectedCatgory) {
     selectedCategory.value = selectedCatgory;
+    update();
   }
 
   RxList categories = [

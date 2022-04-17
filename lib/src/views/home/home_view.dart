@@ -2,7 +2,6 @@ import 'package:dpcargo/src/views/utilities/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
-
 import '../cargo/home_cargo/home_cargo_view.dart';
 import '../trips/home_trips/home_trips_view.dart';
 
@@ -20,7 +19,7 @@ class HomeView extends StatelessWidget {
         child: Responsive(
           mobile: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
+            children: const [
               WidgetBanner(),
               WidgetTitle(),
               WidgetStraggeredGridView(
@@ -40,12 +39,12 @@ class HomeView extends StatelessWidget {
       // crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Container(
-          color: Color(0xFF64B5F6),
-          child: WidgetBanner(),
+          color: const Color(0xFF64B5F6),
+          child: const WidgetBanner(),
         ),
         Row(
           children: [
-            WidgetTitle(),
+            const WidgetTitle(),
             Expanded(
                 child: WidgetStraggeredGridView(
               crossAxisCount: size,
@@ -56,18 +55,18 @@ class HomeView extends StatelessWidget {
           Container(
             height: 150,
             width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.all(10),
-            color: Color(0xFF64B5F6),
+            padding: const EdgeInsets.all(10),
+            color: const Color(0xFF64B5F6),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text(
+                const Text(
                   "DBCargo.com",
                   style: TextStyle(fontSize: 20),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
+                  children: const [
                     Icon(Icons.whatsapp),
                     Icon(Icons.facebook),
                     Icon(Icons.snapchat),
@@ -77,10 +76,10 @@ class HomeView extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Icon(Icons.snapchat),
+                    const Icon(Icons.snapchat),
                     // Icon(Icons.snapchat),
                     Row(
-                      children: [
+                      children: const [
                         Icon(Icons.paypal),
                         Icon(Icons.payment),
                         Icon(Icons.paypal),
@@ -128,7 +127,7 @@ class _WidgetBannerState extends State<WidgetBanner> {
             children: [
               Row(
                 children: [
-                  Container(
+                  SizedBox(
                     width: 40,
                     child: IconButton(
                         onPressed: () {},
@@ -177,7 +176,7 @@ class _WidgetBannerState extends State<WidgetBanner> {
                       ],
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     width: 40,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(1000),
@@ -390,7 +389,7 @@ class _WidgetStraggeredGridViewState extends State<WidgetStraggeredGridView> {
                     bgColor: MyColors.yellow,
                     borderRadius: BorderRadius.circular(100),
                     child: const Center(
-                      child: const Icon(Icons.calculate),
+                      child: Icon(Icons.calculate),
                     )),
                 const SizedBox(
                   height: 15,
@@ -433,7 +432,7 @@ class _WidgetStraggeredGridViewState extends State<WidgetStraggeredGridView> {
                     width: 50,
                     bgColor: MyColors.yellow,
                     borderRadius: BorderRadius.circular(100),
-                    child: const Center(child: const Icon(Icons.car_rental))),
+                    child: const Center(child: Icon(Icons.car_rental))),
                 const SizedBox(
                   height: 15,
                 ),
@@ -475,7 +474,7 @@ class _WidgetStraggeredGridViewState extends State<WidgetStraggeredGridView> {
                     width: 50,
                     bgColor: MyColors.yellow,
                     borderRadius: BorderRadius.circular(100),
-                    child: const Center(child: const Icon(Icons.analytics))),
+                    child: const Center(child: Icon(Icons.analytics))),
                 const SizedBox(
                   height: 15,
                 ),
@@ -517,7 +516,7 @@ class _WidgetStraggeredGridViewState extends State<WidgetStraggeredGridView> {
                     width: 50,
                     bgColor: MyColors.yellow,
                     borderRadius: BorderRadius.circular(100),
-                    child: const Center(child: const Icon(Icons.restore))),
+                    child: const Center(child: Icon(Icons.restore))),
                 const SizedBox(
                   height: 15,
                 ),
@@ -652,7 +651,7 @@ class CustomCard extends StatelessWidget {
       decoration: BoxDecoration(
           color: bgColor,
           borderRadius:
-              borderRadius == null ? BorderRadius.circular(25) : borderRadius,
+              borderRadius ?? BorderRadius.circular(25),
           boxShadow: [
             if (shadow)
               BoxShadow(
@@ -673,7 +672,7 @@ class CustomCard extends StatelessWidget {
           color: Colors.transparent,
           child: InkWell(
             onTap: onTap,
-            child: child == null ? Container() : child,
+            child: child ?? Container(),
           ),
         ),
       ),
